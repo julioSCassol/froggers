@@ -41,6 +41,7 @@ body {
   outline: none;
   font-size: 14px;
   flex-grow: 1;
+  width: 30rem;
   color: var(--cinza-froggers);
 }
 
