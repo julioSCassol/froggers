@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="svgviewer-output.svg" alt="Logo Froggers">
+  <img src="logo.svg" alt="Logo Froggers">
 </p>
 
 ### Projeto de E-Commerce de produtos geeks, feito com HTML, css e MySQL
