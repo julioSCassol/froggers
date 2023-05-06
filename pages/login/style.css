@@ -61,18 +61,20 @@ body {
   cursor: pointer;
   font-family: 'Material Icons', sans-serif;
 }
+#header{
+  width: 100%;
+  position: fixed;
+}
 
 #topper {
-  width: 100%;
   height: 5.3vh;
   background-color: rgba(233, 233, 233, 1);
   display: flex; /* Add this line */
-  justify-content: center; /* Add this line */
-  align-items: center; /* Add this line */
+justify-content: center; /* Add this line */
+align-items: center; /* Add this line */
 }
 
 #coisas-que-vende {
-  width: 100%;
   height: 30px;
   
   background-color: rgba(79, 179, 69, 1);
