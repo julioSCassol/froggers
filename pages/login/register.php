@@ -13,12 +13,21 @@ if ($conn->connect_error) {
 $email = $_POST['email'];
 $senha = $_POST['password'];
 
-$sql = "INSERT INTO clientes (email, senha) VALUES ('$email', '$senha')";
-if ($conn->query($sql) === TRUE) {
-    echo "Registration successful!";
-} else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
-}
+if(empty($email) || empty($senha)){
+    echo "Por favor preencha todos os campos";
+ }else{
+        $sql = "INSERT INTO clientes (email, senha) VALUES ('$email', '$senha')";
+    if ($conn->query($sql) === TRUE) {
+        echo "Registration successful!";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+ }
+ 
+
+
+
+
 
 $conn->close();
 
