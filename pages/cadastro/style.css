@@ -247,6 +247,7 @@ align-items: center;
 .form-container input[type="email"],
 .form-container input[type="text"],
 .form-container input[type="password"],
+.form-container input[type="nome"],
 .form-container input[type="senha"] {
   background-color: rgba(217, 217, 217, 1);
   border: none;
@@ -259,6 +260,17 @@ align-items: center;
   height: 4vh;
   color: var(--cinza-froggers);
 }
+.form-container input[type="senha"] {
+  width: 15rem;
+}
+
+.caixa-senha{
+  display: flex;
+  gap: 10px;
+}
+
+
+
 .login-form{
   display: flex;
   flex-direction: column;
