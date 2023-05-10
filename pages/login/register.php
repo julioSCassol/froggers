@@ -1,8 +1,8 @@
 <?php
 
-$servername = "Luiz"; //dps muda essa bomba aq
-$username = "picoli"; 
-$password = "lolmolpp"; //hackeia eu n
+$servername = "localhost"; //dps muda essa bomba aq
+$username = "froggers"; 
+$password = "password"; //hackeia eu n
 $dbname = "froggers";
 $conn = new mysqli($servername, $username, $password, $dbname);
 
