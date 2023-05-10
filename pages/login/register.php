@@ -1,8 +1,12 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-$servername = "Luiz"; //dps muda essa bomba aq
-$username = "picoli"; 
-$password = "lolmolpp"; //hackeia eu n
+
+$servername = "localhost"; //dps muda essa bomba aq
+$username = "froggers"; 
+$password = "123"; //hackeia eu n
 $dbname = "froggers";
 $conn = new mysqli($servername, $username, $password, $dbname);
 
