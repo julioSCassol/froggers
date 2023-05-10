@@ -16,59 +16,57 @@ document.getElementById('close-menu').addEventListener('click', toggleMenu);
 const pagina = document.querySelector('.pagina');
 pagina.style.minHeight = window.innerHeight + 'px';
 
-const catalogItems = [
-  {
-    id: 1,
-    title: "T-Shirt",
-    image: "/assets/icons/camisa chorão ico1teste.png",
-  },
-  {
-    id: 2,
-    title: "Sneakers",
-    image: "/assets/icons/camisa shinjo ico.png",
-  },
-  {
-    id: 3,
-    title: "Backpack",
-    image: "/assets/icons/hanna ico.png",
-  },
-  {
-    id: 4,
-    title: "Smartphone",
-    image: "https://via.placeholder.com/150/CC33FF/FFFFFF/?text=Smartphone",
-  },
-  {
-      id: 5,
-      title: "Headphones",
-      image: "https://via.placeholder.com/150/FF33A7/FFFFFF/?text=Headphones",
-  },
-  {
-    id: 6,
-    title: "Headphones",
-    image: "https://via.placeholder.com/150/FF33A7/FFFFFF/?text=Headphones",
-  },
-  {
-    id: 7,
-    title: "Headphones",
-    image: "https://via.placeholder.com/150/FF33A7/FFFFFF/?text=Headphones",
-  },
-  {
-    id: 8,
-    title: "Headphones",
-    image: "https://via.placeholder.com/150/FF33A7/FFFFFF/?text=Headphones",
-  },
-];
+const catalogItems = [];
 
+const iconsFolder = '/assets/icons/';
 
-const catalogElement = document.getElementById('catalog');
+const request = new XMLHttpRequest();
+request.open('GET', iconsFolder);
+request.responseType = 'document';
+request.onload = function() {
+  const response = request.response;
+  const links = response.getElementsByTagName('a');
+  for (let i = 0; i < links.length; i++) {
+    const link = links[i].href;
+    if (link.endsWith('.png')) {
+      const title = decodeURIComponent(link.substring(link.lastIndexOf('/') + 1, link.lastIndexOf('.')).replace(/[-_]/g, ' '));
+      catalogItems.push({
+        id: catalogItems.length + 1,
+        title: `Camiseta ${title}`,
+        titleOG: `${title}`,
+        image: link,
+        price: `R$0,00`,
+      });      
+    }
+  }
 
-catalogItems.forEach(item => {
-  const catalogItem = document.createElement('div');
-  catalogItem.className = 'catalog-item';
-  catalogItem.innerHTML = `
-    <img src="${item.image}" alt="${item.title}">
-    <h3>${item.title}</h3>
-  `;
-  catalogElement.appendChild(catalogItem);
-});
+  const catalogElement = document.getElementById('catalog');
+
+  catalogItems.forEach(item => {
+    const catalogItem = document.createElement('div');
+    catalogItem.className = 'catalog-item';
+    const price = item.title.includes('Camiseta') ? 'R$39.99' : item.price;
+    catalogItem.innerHTML = `
+      <img src="${item.image}" alt="${item.title}" class="catalog-item-img">
+      <div class="title-wrapper">
+        <h3 class="catalog-title">${item.title}</h3>
+        <div class="comprar-button">Comprar</div>
+        <span id="catalog-price">${price}</span>
+      </div>
+        
+    `;
+    catalogElement.appendChild(catalogItem);
+  
+    const catalogItemImage = catalogItem.querySelector('.catalog-item-img');
+    catalogItem.addEventListener('mouseenter', () => {
+      catalogItemImage.src = `/assets/modelo/modelo ${item.titleOG}.png`;
+    });    
+    catalogItem.addEventListener('mouseleave', () => {
+      catalogItemImage.src = item.image;
+    });
+    
+  });
+  
+};
+request.send();
 
