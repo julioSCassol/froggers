@@ -6,9 +6,7 @@
   padding: 0;
   box-sizing: border-box;
 }
-.logged-in {
-  color: red;
-}
+
 
 body {
   font-family: 'Roboto', sans-serif;
