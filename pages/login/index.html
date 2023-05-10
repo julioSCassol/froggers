@@ -68,9 +68,9 @@
 
             <div class="form-container">
                 <img src="/assets/images/logo-completa.png" alt="logo-login">
-                <form class="login-form">
-                    <input type="email" placeholder="Email">
-                    <input type="senha" placeholder="Senha">
+                <form class="login-form" action="/froggers-main/pages/login/verify.php" method="post">
+                    <input type="email" name="email" placeholder="Email">
+                    <input type="password" name="password" placeholder="Senha">
                     <div class="checkbox-div">
                         <label class="custom-checkbox"> 
                             <span id="CAPTCHA">CAPTCHA</span> 
@@ -79,8 +79,6 @@
                         </label>
                     </div>
                     <button type="submit">Login</button>
-                    
-                    
                 </form>
             </div>
 
@@ -121,3 +119,4 @@
     </body>   
     
 </html>
+
