@@ -248,7 +248,7 @@ align-items: center;
 .form-container input[type="text"],
 .form-container input[type="password"],
 .form-container input[type="nome"],
-.form-container input[type="senha"] {
+.form-container input[type="password"] {
   background-color: rgba(217, 217, 217, 1);
   border: none;
   padding: 8px 12px;
@@ -260,7 +260,7 @@ align-items: center;
   height: 4vh;
   color: var(--cinza-froggers);
 }
-.form-container input[type="senha"] {
+.form-container input[type="password"] {
   width: 15rem;
 }
 
