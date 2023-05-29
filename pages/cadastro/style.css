@@ -357,3 +357,7 @@ img[alt="logo-login"]{
   height: 5.6vh;
   font-weight: 700;
 }
+
+#cadastrado{
+  color: var(--cinza-froggers);
+}

@@ -259,7 +259,7 @@ align-items: center;
   margin-bottom: 0; /* Add this line */
 }
 
-#catalog-price {
+.catalog-price {
   font-weight: bold;
   color: var(--verde-froggers);
   text-align: center;

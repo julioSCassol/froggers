@@ -47,24 +47,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
           catalogItem.className = 'catalog-item';
           catalogItem.innerHTML = `
-          <a href="/pages/produto-camisetas/index.php?id=${produto.id}">
-            <img src="/assets/moletons/${produto.nome}.png" alt="${produto.nome}" class="catalog-item-img">
-          </a>            
-          <div class="title-wrapper">
+              <a href="/pages/produto-camisetas/index.php?id=${produto.id}">
+                <img src="/assets/canecas/${produto.nome}.png" alt="${produto.nome}" class="catalog-item-img">
+              </a>
+              <div class="title-wrapper">
               <h3 class="catalog-title">${produto.nome}</h3>
               <div class="comprar-button">Comprar</div>
               <span class="catalog-price">R$${parseFloat(produto.preco).toFixed(2)}</span>
             </div>
           `;
           catalog.appendChild(catalogItem);
-
-          const catalogItemImage = catalogItem.querySelector('.catalog-item-img');
-          catalogItem.addEventListener('mouseenter', () => {
-            catalogItemImage.src = `/assets/modeloM/modelo ${produto.nome}.png`;
-          });    
-          catalogItem.addEventListener('mouseleave', () => {
-            catalogItemImage.src = `/assets/moletons/${produto.nome}.png`;
-          });
         });
       })
       .catch(error => console.error('Error:', error));

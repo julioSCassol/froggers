@@ -1,0 +1,498 @@
+:root{
+  --cinza-froggers: rgba(71, 71, 71, 1);
+  --verde-froggers: rgba(79, 179, 69, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  height: 100%;
+  background-color: rgba(233, 233, 233, 1);
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+
+.pagina {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.pagina:after {
+  content: "";
+  display: block;
+  height: 220px;
+}
+
+.search-container {
+  position: relative;
+  margin-right: 2rem;
+  color: var(--cinza-froggers);
+}
+
+.search-container input[type="text"] { 
+  background-color: rgba(217, 217, 217, 1);
+  margin-left: 3rem;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 50px;
+  outline: none;
+  font-size: 14px;
+  flex-grow: 1;
+  width: 30rem;
+  color: var(--cinza-froggers);
+}
+
+.search-container button[type="submit"] {
+  display: flex;
+  border-radius: 50px;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  padding: 8px;
+  background-color: rgba(217, 217, 217, 1);
+  color: var(--cinza-froggers);
+  border: none;
+  cursor: pointer;
+  font-family: 'Material Icons', sans-serif;
+}
+#header{
+  width: 100%;
+  position: fixed;
+  z-index: 5;
+}
+
+#topper {
+  height: 5.3vh;
+  background-color: rgba(233, 233, 233, 1);
+  display: flex; /* Add this line */
+justify-content: center; /* Add this line */
+align-items: center; /* Add this line */
+}
+
+#coisas-que-vende {
+  height: 30px;
+  
+  background-color: rgba(79, 179, 69, 1);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.categorias {
+  display: inline-block;
+  font-weight: 1000;
+  text-transform: uppercase;
+  color: white;
+  padding: 10px;
+  gap: 50;
+  padding-right: 50px;
+  padding-left: 50px;
+  letter-spacing: 1.5px;
+}
+
+.logo-container {
+height: auto;
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+}
+.logo-completa{
+width: 5.5rem;
+}
+
+.icones   {
+color: var(--cinza-froggers);
+display: flex;
+font-size: 1.5rem;
+font-family: 'Material Icons', sans-serif;
+gap: 30%;
+}
+.conta{
+display: flex;
+align-items: center;
+position: relative;
+display: inline-block;
+}
+
+footer{
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 220px;
+  display: flex;
+  background-color: var(--cinza-froggers);
+  color: rgba(217, 217, 217, 1);
+  padding-left: 15px;
+  padding-top: 15px;
+  gap: 50px;
+  font-size: 30;
+  font-weight: 700;
+}
+.redes_footer{
+gap: 10px;
+display: flex;
+flex-direction: column;
+}
+.redes{
+width: 100px;
+height: auto;
+}
+.Itens{
+margin-top: 10px;
+font-weight: 100;
+}
+.Itens div{
+margin-bottom: 10px;
+}
+
+
+#sliding-menu {
+position: fixed;
+top: 0;
+right: 0;
+width: 250px;
+height: 100%;
+background-color: rgba(255, 255, 255, 1);
+overflow-x: hidden;
+transition: 0.5s;
+z-index: 1;
+padding: 20px;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.menu-closed {
+transform: translateX(100%);
+}
+
+#header-menu{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.carrinho-vazio{
+  font-weight: 300;
+  cursor: pointer;
+}
+
+#close-menu {
+  font-size: 3vh;
+  top: 20px;
+  right: 20px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+#overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.5);
+z-index: 0;
+transition: opacity 0.5s;
+}
+
+.overlay-hidden {
+pointer-events: none;
+opacity: 0;
+transition: opacity 0.5s;
+}
+
+.Sapo-triste {
+display: flex;
+justify-content: center;
+align-items: center;
+height: 87%; 
+}
+
+img[alt="Sapo-triste"]{
+width: 200px;
+}
+
+.conta{
+cursor: pointer;
+display: flex;
+align-items: center;
+}
+
+.material-icons {
+  color: var(--cinza-froggers);
+  cursor: pointer;
+  font-family: 'Material Icons', sans-serif;
+}
+
+.imagem-camiseta {
+  display: flex;
+  align-items: center;
+  margin-top: 4%;
+  justify-content: center;
+}
+
+#camisetaIMG {
+  margin-top: 5%;
+  margin-left: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 20%;
+}
+
+#camisetaIMG img{
+  width: 100%;
+  height: auto;
+}
+
+.descricao-preco {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 5%;
+}
+
+.quadrados-tamanho, #botao-grande, #tamanhos-produto {
+  margin-right: auto;
+}
+
+#preco-container{
+  text-align: left;
+  width: 100%;
+}
+
+.descricao-imagem {
+  font-size: 32px;
+  color: var(--cinza-froggers);
+  max-width: 80%;
+  text-align: center;
+}
+
+#nome-produto {
+  margin-top: 10px;
+  text-align: center;
+}
+
+#preco-produto {
+  font-size: 24px;
+  margin-top: 10px;
+  color: var(--verde-froggers);
+  font-weight: 900;
+}
+
+.material-icons.size-icon {
+  font-size: 24px;
+  margin-left: 5px;
+  vertical-align: middle;
+}
+
+.quadrados-tamanho {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.quadrado {
+  background-color: rgba(79, 179, 69, 1);
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.letra {
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.quadrado.clicked {
+  background-color: rgba(31, 90, 26, 0.8);
+}
+
+#tamanhos-produto {
+  color: var(--cinza-froggers);
+  font-weight: bold;
+  font-size: 20px;
+  margin-top: 40px;
+  margin-bottom: 10px;
+}
+
+#botao-grande {
+  box-sizing: border-box; 
+  background-color: rgba(79, 179, 69, 1);
+  width: 50vh;
+  height: 5vh;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 32px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+#botao-grande::before {
+  right: 10px;
+  color: white;
+}
+
+#paragrafo-frete {
+  font-size: 16px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+#inserir-cep {
+  border-radius: 6px;
+  border: none;
+  height: 25px;
+  font-size: 16px;
+  width: 200px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+#inserir-cep:focus {
+  outline: none;
+}
+
+#inserir-cep::placeholder {
+  font-size: 16px;
+  font-style: italic;
+}
+
+.produtos-relacionados {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 50px;
+}
+
+#nome-produto {
+  margin-top: 10px;
+  text-align: left; /* Changed from center to left */
+}
+
+#preco-produto {
+  font-size: 24px;
+  margin-top: 10px;
+  color: var(--verde-froggers);
+  font-weight: 900;
+  text-align: left; /* Changed from center to left */
+}
+.catalog-container {
+  position: relative;
+}
+.swiper-button-next,
+.swiper-button-prev {
+  color: var(--cinza-froggers);
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  color: var(--cinza-froggers);
+}
+.swiper-wrapper {
+  display: flex;
+  align-items: flex-start; /* Add this line */
+}
+
+.swiper-slide {
+  margin-right: 20px; /* Adjust the value as needed */
+}
+
+.swiper-button-next {
+  right: 10px;
+}
+
+.swiper-button-prev {
+  left: 10px;
+}
+
+.catalog-container {
+  margin-top: 10vh;
+  padding-left: 30vh;
+  padding-right: 30vh;
+  width: 100%;
+}
+
+#catalog {
+  width: 100%;
+}
+
+.catalog-item {
+  cursor: pointer;
+  width: 100%;
+}
+
+.catalog-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: opacity 0.1s ease;
+}
+
+.title-wrapper {
+  position: relative;
+}
+
+.catalog-title {
+  padding: 5px;
+  color: var(--cinza-froggers);
+  font-weight: 500;
+  margin-bottom: 0; /* Add this line */
+}
+
+.catalog-price {
+  font-weight: bold;
+  color: var(--verde-froggers);
+  text-align: center;
+}
+.comprar-button {
+  position: absolute;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  background-color: var(--verde-froggers);
+  z-index: 2;
+  transition: opacity 0.1s ease;
+
+  /* Add the following lines */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.catalog-item:hover .comprar-button {
+  opacity: 1;
+}

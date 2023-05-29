@@ -16,57 +16,63 @@ document.getElementById('close-menu').addEventListener('click', toggleMenu);
 const pagina = document.querySelector('.pagina');
 pagina.style.minHeight = window.innerHeight + 'px';
 
-const catalogItems = [];
 
-const iconsFolder = '/assets/icons/';
+document.addEventListener('DOMContentLoaded', (event) => {
+  // reference to the sort select element
+  const sortSelect = document.getElementById('sort');
+  
+  function fetchAndDisplayProducts() {
+    fetch('nomes.php')
+      .then(response => response.json())
+      .then(produtos => {
+        // Sort products based on selected sort order
+        const sortValue = sortSelect.value;
+        switch(sortValue) {
+          case 'name-asc':
+            produtos.sort((a, b) => a.nome.localeCompare(b.nome));
+            break;
+          case 'name-desc':
+            produtos.sort((a, b) => b.nome.localeCompare(a.nome));
+            break;
+          // ... handle other sort orders here ...
+        }
+  
+        // Now, display the products
+        const catalog = document.getElementById('catalog');
+        // Clear the existing products
+        catalog.innerHTML = '';
 
-const request = new XMLHttpRequest();
-request.open('GET', iconsFolder);
-request.responseType = 'document';
-request.onload = function() {
-  const response = request.response;
-  const links = response.getElementsByTagName('a');
-  for (let i = 0; i < links.length; i++) {
-    const link = links[i].href;
-    if (link.endsWith('.png')) {
-      const title = decodeURIComponent(link.substring(link.lastIndexOf('/') + 1, link.lastIndexOf('.')).replace(/[-_]/g, ' '));
-      catalogItems.push({
-        id: catalogItems.length + 1,
-        title: `Camiseta ${title}`,
-        titleOG: `${title}`,
-        image: link,
-        price: `R$0,00`,
-      });      
-    }
-  }
-
-  const catalogElement = document.getElementById('catalog');
-
-  catalogItems.forEach(item => {
-    const catalogItem = document.createElement('div');
-    catalogItem.className = 'catalog-item';
-    const price = item.title.includes('Camiseta') ? 'R$39.99' : item.price;
-    catalogItem.innerHTML = `
-      <img src="${item.image}" alt="${item.title}" class="catalog-item-img">
-      <div class="title-wrapper">
-        <h3 class="catalog-title">${item.title}</h3>
-        <div class="comprar-button">Comprar</div>
-        <span id="catalog-price">${price}</span>
-      </div>
+        produtos.forEach(produto => {
+          const catalogItem = document.createElement('div');
         
-    `;
-    catalogElement.appendChild(catalogItem);
+          catalogItem.className = 'catalog-item';
+          catalogItem.innerHTML = `
+          <a href="/pages/produto-camisetas/index.php?id=${produto.id}">
+            <img src="/assets/camisetas/${produto.nome}.png" alt="${produto.nome}" class="catalog-item-img">
+          </a>            <div class="title-wrapper">
+              <h3 class="catalog-title">${produto.nome}</h3>
+              <div class="comprar-button" onclick="window.location.href='/pages/produto-camisetas/index.php?id=${produto.id}'">Comprar</div>
+              <span class="catalog-price">R$${parseFloat(produto.preco).toFixed(2)}</span>
+            </div>
+          `;
+          catalog.appendChild(catalogItem);
+        
+        const catalogItemImage = catalogItem.querySelector('.catalog-item-img');
+          catalogItem.addEventListener('mouseenter', () => {
+            catalogItemImage.src = `/assets/modelo/modelo ${produto.nome}.png`;
+          });    
+          catalogItem.addEventListener('mouseleave', () => {
+            catalogItemImage.src = `/assets/camisetas/${produto.nome}.png`;
+          });
+        });
+        
+      })
+      .catch(error => console.error('Error:', error));
+  }
   
-    const catalogItemImage = catalogItem.querySelector('.catalog-item-img');
-    catalogItem.addEventListener('mouseenter', () => {
-      catalogItemImage.src = `/assets/modelo/modelo ${item.titleOG}.png`;
-    });    
-    catalogItem.addEventListener('mouseleave', () => {
-      catalogItemImage.src = item.image;
-    });
-    
-  });
-  
-};
-request.send();
+  // Fetch and display products initially
+  fetchAndDisplayProducts();
 
+  // Fetch, sort and display products when the selected sort order changes
+  sortSelect.addEventListener('change', fetchAndDisplayProducts);
+});
