@@ -1,4 +1,5 @@
 <?php
+    include '../cart.php';
     $id = $_GET['id'];
 
     function getprodutoByID($id)
@@ -41,7 +42,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet"> 
         <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
         <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">       
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
     <body>
         <div class="pagina">
@@ -125,7 +126,7 @@
                         <span class="letra">GG</span>
                     </button>
                 </div>
-                <button class="descricao-imagem" id="botao-grande">Adicionar ao carrinho</button>
+                <button class="descricao-imagem" id="botao-grande" onclick="addToCart()">Adicionar ao carrinho</button>
             </div>
         </div>
         <div class="catalog-container">

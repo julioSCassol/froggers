@@ -87,3 +87,14 @@ new Swiper('.swiper-container', {
 
 // Fetch and display products initially
 fetchAndDisplayProducts();
+
+function addToCart() {
+  $.ajax({
+      url: '../cart.php',
+      type: 'POST', 
+      data: { productID: '<?php echo $produto[',id,']; ?>': orderID, quantity: quantity },
+      success: function(response) {
+          alert(response); 
+      }
+  });
+}
