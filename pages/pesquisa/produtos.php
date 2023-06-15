@@ -21,6 +21,14 @@ while ($row = mysqli_fetch_assoc($resultado)) {
     array_push($produtos, $row);
 }
 
+// Check if any products were found
+$productsFound = count($produtos) > 0;
+
+$response = array(
+    "products" => $produtos,
+    "productsFound" => $productsFound
+);
+
 header('Content-Type: application/json');
-echo json_encode($produtos);
+echo json_encode($response);
 ?>
