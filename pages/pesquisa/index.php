@@ -22,15 +22,12 @@
                         </div>
                     </a>
                     
-
                     <div class="search-container">
                         <form id="search-form" action="" method="GET">
                             <input id="search-input" type="text" name="search" placeholder="Search...">
                             <button type="submit"> <span class="material-symbols-outlined">arrow_forward_ios</span></button>
                         </form>
                     </div>
-
-
                     
                     <div class="icones">
                         <div class="conta">
