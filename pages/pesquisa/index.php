@@ -1,5 +1,3 @@
-<?php include 'search.php'; ?>
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -71,7 +69,20 @@
                     </a>
                 </div>
             </div>
-            <div id="search-results"></div>
+            <div class="catalog-container">
+                <div class="sort-container">
+                    <label for="sort">Filtrar por:</label>
+                    <select id="sort" name="sort">
+                      <option value="default">Padrão</option>
+                      <option value="name-asc">Nome: A à Z</option>
+                      <option value="name-desc">Name: Z à A</option>
+                    </select>
+                  </div>
+                
+                <div class="catalog" id="catalog">
+                  <!-- Catalog items go here -->
+                </div>
+            </div>
         </div>
 
 
