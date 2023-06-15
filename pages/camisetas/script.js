@@ -76,3 +76,30 @@ document.addEventListener('DOMContentLoaded', (event) => {
   // Fetch, sort and display products when the selected sort order changes
   sortSelect.addEventListener('change', fetchAndDisplayProducts);
 });
+
+        // Function to handle the search form submission
+        function handleSearch(event) {
+          event.preventDefault();
+          var searchTerm = document.getElementById("search-input").value;
+          searchProducts(searchTerm);
+      }
+
+      // Function to make AJAX request and fetch search results
+      function searchProducts(searchTerm) {
+          var xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+              var searchResults = document.getElementById("search-results");
+              searchResults.innerHTML = this.responseText;
+            }
+          
+          };
+          xhttp.open("GET", "../pesquisa/search.php?search=" + searchTerm, true);
+          xhttp.send();
+      }
+
+      // Attach the event listener to the search form
+      var searchForm = document.getElementById("search-form");
+      searchForm.addEventListener("submit", handleSearch);
+
+      
