@@ -1,7 +1,6 @@
 <?php
 include '../db.php';
 
-// Check if form is submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nome = $_POST['name'];
     $email = $_POST['email'];

@@ -1,7 +1,7 @@
 <?php
+session_start();
 include '../db.php';
 
-// Check if form is submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST["email"];
     $senha = $_POST["password"];
@@ -14,9 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($resultado && mysqli_num_rows($resultado) > 0) {
         $isUserLoggedIn = true;
-        // Fetch the user data
         $userData = mysqli_fetch_assoc($resultado);
-        // Store the username in the session
         $_SESSION['username'] = $userData['nome'];
     } else {
         echo '<script>alert("Email e/ou senha incorretos!");</script>';

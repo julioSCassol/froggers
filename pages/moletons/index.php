@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -49,7 +53,8 @@
                         </div>
                         <div class="Sapo-triste">
                             <img src="/assets/images/Sapo-triste.png" alt="Sapo-triste">
-                        </div>
+                            </div>
+                        <span><?php echo $_SESSION['username']; ?></span>
                         <span id="continue-shopping" class="carrinho-vazio"><u>Continuar Comprando</u></span>
                     </div>
                     
@@ -83,7 +88,7 @@
                   </div>
                 
                 <div class="catalog" id="catalog">
-                  <!-- Catalog items go here -->
+
                 </div>
             </div>
 

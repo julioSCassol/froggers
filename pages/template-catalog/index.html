@@ -1,7 +1,3 @@
-<?php
-session_start();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -21,7 +17,7 @@ session_start();
         <div class="pagina">
             <div id=    "header">
                 <div id="topper">
-                    <a href="/pages/home/index.php">
+                    <a href="/pages/home/index.html">
                         <div class="logo-container">
                             <img class="logo-completa" src="/assets/images/logo-completa.png" alt="logo-completa">
                         </div>
@@ -29,15 +25,13 @@ session_start();
                     
 
                     <div class="search-container">
-                        <form id="search-form" action="/pages/pesquisa/" method="GET">
-                            <input id="search-input" type="text" name="search" placeholder="Search...">
-                            <button type="submit"> <span class="material-symbols-outlined">arrow_forward_ios</span></button>
-                        </form>
+                        <input type="text" placeholder="Search...">
+                        <button type="submit"> <span class="material-symbols-outlined">arrow_forward_ios</span></button>
                     </div>
                     
                     <div class="icones">
                         <div class="conta">
-                            <a href="/pages/login/index.php">
+                            <a href="/pages/login/index.html">
                                 <span class="material-icons">person</span>
                             </a>
                             </div>
@@ -54,41 +48,43 @@ session_start();
                         </div>
                         <div class="Sapo-triste">
                             <img src="/assets/images/Sapo-triste.png" alt="Sapo-triste">
-                            </div>
-                        <span><?php echo $_SESSION['username']; ?></span>
+                        </div>
                         <span id="continue-shopping" class="carrinho-vazio"><u>Continuar Comprando</u></span>
                     </div>
                     
                 </div>
 
                 <div id="coisas-que-vende">
-                    <a href="/pages/camisetas/index.php">
+                    <a href="/pages/camisetas/index.html">
                         <div class="categorias">camisetas</div>
                     </a>
-                    <a href="/pages/moletons/index.php">
+                    <a href="/pages/moletons/index.html">
                         <div class="categorias">moletons</div>
                     </a>
-                    <a href="/pages/canecas/index.php">
+                    <a href="/pages/canecas/index.html">
                         <div class="categorias">canecas</div>
                     </a>
                 </div>
             </div>
             
-            <div id="banner-canecas">
-                <img src="/assets/banners/BANNER CANECAS.png" alt="banner-canecas">
+            <div id="banner-camisetas">
+                <img src="/assets/banners/BANNER CAMISETAS.png" alt="banner-camisetas">
             </div>
 
             <div class="catalog-container">
                 <div class="sort-container">
-                    <label for="sort">Filtrar por:</label>
+                    <label for="sort">Sort by:</label>
                     <select id="sort" name="sort">
-                      <option value="default">Padrão</option>
-                      <option value="name-asc">Nome: A à Z</option>
-                      <option value="name-desc">Name: Z à A</option>
+                      <option value="default">Default</option>
+                      <option value="price-asc">Price: Low to High</option>
+                      <option value="price-desc">Price: High to Low</option>
+                      <option value="name-asc">Name: A to Z</option>
+                      <option value="name-desc">Name: Z to A</option>
                     </select>
                   </div>
                 
                 <div class="catalog" id="catalog">
+                  <!-- Catalog items go here -->
                 </div>
             </div>
 

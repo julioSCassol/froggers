@@ -18,14 +18,12 @@ pagina.style.minHeight = window.innerHeight + 'px';
 
 
 document.addEventListener('DOMContentLoaded', (event) => {
-  // reference to the sort select element
   const sortSelect = document.getElementById('sort');
   
   function fetchAndDisplayProducts() {
     fetch('nomes.php')
       .then(response => response.json())
       .then(produtos => {
-        // Sort products based on selected sort order
         const sortValue = sortSelect.value;
         switch(sortValue) {
           case 'name-asc':
@@ -34,12 +32,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
           case 'name-desc':
             produtos.sort((a, b) => b.nome.localeCompare(a.nome));
             break;
-          // ... handle other sort orders here ...
         }
   
-        // Now, display the products
         const catalog = document.getElementById('catalog');
-        // Clear the existing products
         catalog.innerHTML = '';
 
         produtos.forEach(produto => {
@@ -70,9 +65,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
       .catch(error => console.error('Error:', error));
   }
   
-  // Fetch and display products initially
   fetchAndDisplayProducts();
 
-  // Fetch, sort and display products when the selected sort order changes
   sortSelect.addEventListener('change', fetchAndDisplayProducts);
 });

@@ -78,7 +78,7 @@
                   </div>
                 
                 <div class="catalog" id="catalog">
-                  <!-- Catalog items go here -->
+    
                 </div>
             </div>
         </div>

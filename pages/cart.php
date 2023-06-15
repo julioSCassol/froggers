@@ -1,4 +1,5 @@
 <?php
+
 // add to cart
 function addToCart($productID, $quantity, $orderID) {
     global $conn;
@@ -29,4 +30,40 @@ function checkout($orderID) {
     $stmt->bind_param("ii", $orderID, $orderID);
     $stmt->execute();
 }
+
+
+
+// Check if the product ID is provided in the POST data
+if (isset($_POST['productID'])) {
+    $productID = $_POST['productID'];
+
+    // Add the product to the shopping cart session variable
+    if (!isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = array();
+    }
+
+    // Check if the product is already in the shopping cart
+    $found = false;
+    foreach ($_SESSION['cart'] as $item) {
+        if ($item['id'] == $productID) {
+            // Increment the quantity if the product is already in the cart
+            $item['quantity']++;
+            $found = true;
+            break;
+        }
+    }
+
+    // If the product is not in the cart, add it as a new item
+    if (!$found) {
+        $newItem = array(
+            'id' => $productID,
+            'quantity' => 1
+        );
+        $_SESSION['cart'][] = $newItem;
+    }
+
+    // Return a success message or any other response you want
+    echo "Item added to the cart";
+}
 ?>
+

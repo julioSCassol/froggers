@@ -16,7 +16,6 @@ const pagina = document.querySelector('.pagina');
 pagina.style.minHeight = window.innerHeight + 'px';
 
 document.addEventListener('DOMContentLoaded', (event) => {
-  // reference to the sort select element
   const sortSelect = document.getElementById('sort');
 
   function fetchAndDisplayProducts() {
@@ -42,11 +41,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
             case 'name-desc':
               produtos.sort((a, b) => b.nome.localeCompare(a.nome));
               break;
-            // ... handle other sort orders here ...
           }
 
           const catalog = document.getElementById('catalog');
-          // Clear the existing products
           catalog.innerHTML = '';
 
           produtos.forEach(produto => {

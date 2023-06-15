@@ -1,4 +1,5 @@
 <?php
+session_start();
     include '../cart.php';
     $id = $_GET['id'];
 
@@ -20,12 +21,12 @@
 
     $produto = getprodutoByID($id);
 
-    // Check if the $produto variable is empty
     if (empty($produto)) {
-        // Display an error message and exit
         echo '<script>alert("Produto não encontrado!");history.back();</script>';
         exit;
     }
+
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -81,7 +82,8 @@
                         </div>
                         <div class="Sapo-triste">
                             <img src="/assets/images/Sapo-triste.png" alt="Sapo-triste">
-                        </div>
+                            </div>
+                        <span><?php echo $_SESSION['username']; ?></span>
                         <span id="continue-shopping" class="carrinho-vazio"><u>Continuar Comprando</u></span>
                     </div>
                     

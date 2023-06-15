@@ -1,4 +1,5 @@
 <?php
+session_start();
 include '../db.php';
 
 $sql = "SELECT produtos.* FROM produtos where IDcategoria=2";
