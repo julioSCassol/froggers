@@ -89,12 +89,42 @@ new Swiper('.swiper-container', {
 fetchAndDisplayProducts();
 
 function addToCart() {
+  var productID = $("#botao-grande").data('productid');
+
   $.ajax({
-      url: '../cart.php',
-      type: 'POST', 
-      data: { productID: '<?php echo $produto[',id,']; ?>': orderID, quantity: quantity },
-      success: function(response) {
-          alert(response); 
-      }
+    url: '../cart.php',
+    type: 'POST',
+    data: {
+      productID: productID
+    },
+    success: function(produto) {
+      var newCartItem = '<div class="cart-item">';
+      newCartItem += '<div class="product-name">' + produto.nome + '</div>';
+      newCartItem += '<div class="product-quantity">Quantity: 1</div>';
+      newCartItem += '<div class="product-price">Price: ' + produto.preco + '</div>';
+      newCartItem += '</div>';
+
+      $(".cart-catalog").append(newCartItem);
+
+      $('.Sapo-triste').hide();
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log(textStatus, errorThrown);
+    }
   });
 }
+
+$(document).ready(function() {
+  $.ajax({
+    url: '../getCartCount.php',
+    type: 'GET',
+    success: function(count) {
+      if(count > 0) {
+        $('.Sapo-triste').hide();
+      }
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log(textStatus, errorThrown);
+    }
+  });
+});

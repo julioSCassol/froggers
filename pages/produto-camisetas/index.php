@@ -6,7 +6,7 @@ session_start();
     function getprodutoByID($id)
     {
         try {
-            $dbh = new PDO('mysql:host=localhost;dbname=froggers', 'ota', 'password');
+            $dbh = new PDO('mysql:host=localhost;dbname=froggers', 'luizgamer', '123');
 
             $stmt = $dbh->prepare("SELECT * FROM produtos WHERE id = :id and IDcategoria=2");
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
@@ -77,14 +77,20 @@ session_start();
                     </div>
                     <div id="sliding-menu" class="menu-closed">
                         <div id="header-menu">
-                            <span class="carrinho-vazio">Seu carrinho está vazio!</span>
                             <i id="close-menu" class="material-icons">clear</i>
                         </div>
                         <div class="Sapo-triste">
                             <img src="/assets/images/Sapo-triste.png" alt="Sapo-triste">
-                            </div>
-                        <span><?php echo $_SESSION['username']; ?></span>
-                        <span id="continue-shopping" class="carrinho-vazio"><u>Continuar Comprando</u></span>
+                        </div>
+                        <div class="cart-catalog">
+                        </div>
+                        <div id="menu-footer">
+                            Bem vindo,
+                            <span><?php echo $_SESSION['username']; ?></span>
+                            <br>
+                            <span id="continue-shopping" class="carrinho-vazio"><u>Continuar Comprando</u></span>
+                        </div>
+
                     </div>
                     
                 </div>
@@ -130,7 +136,7 @@ session_start();
                         <span class="letra">GG</span>
                     </button>
                 </div>
-                <button class="descricao-imagem" id="botao-grande" onclick="addToCart()">Adicionar ao carrinho</button>
+                <button class="descricao-imagem" id="botao-grande" data-productid="<?= $produto['id'] ?>" onclick="addToCart()">Adicionar ao carrinho</button>
             </div>
         </div>
         <div class="catalog-container">
