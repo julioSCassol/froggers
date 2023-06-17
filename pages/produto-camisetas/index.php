@@ -1,32 +1,26 @@
 <?php
+include '../db.php';
 session_start();
-    include '../cart.php';
-    $id = $_GET['id'];
 
-    function getprodutoByID($id)
-    {
-        try {
-            $dbh = new PDO('mysql:host=localhost;dbname=froggers', 'luizgamer', '123');
+$id = $_GET['id'];
 
-            $stmt = $dbh->prepare("SELECT * FROM produtos WHERE id = :id and IDcategoria=2");
-            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-            $stmt->execute();
+function getprodutoByID($id)
+{
+    global $conn;
+    $stmt = $conn->prepare("SELECT * FROM produtos WHERE id = ? AND IDcategoria = 2");
+    $stmt->bind_param('i', $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_assoc();
+}
 
-            return $stmt->fetch(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            print "Error!: " . $e->getMessage() . "<br/>";
-            die();
-        }
-    }
+$produto = getprodutoByID($id);
 
-    $produto = getprodutoByID($id);
+if (empty($produto)) {
+    echo '<script>alert("Produto não encontrado!");history.back();</script>';
+    exit;
+}
 
-    if (empty($produto)) {
-        echo '<script>alert("Produto não encontrado!");history.back();</script>';
-        exit;
-    }
-
-    
 ?>
 <!DOCTYPE html>
 <html lang="en">

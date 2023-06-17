@@ -29,7 +29,6 @@ function fetchAndDisplayProducts() {
   fetch('nomes.php')
     .then(response => response.json())
     .then(produtos => {
-      // Now, display the products
       const catalog = document.querySelector('.swiper-wrapper');
 
       produtos.forEach(produto => {
@@ -85,10 +84,10 @@ new Swiper('.swiper-container', {
     .catch(error => console.error('Error:', error));
 }
 
-// Fetch and display products initially
 fetchAndDisplayProducts();
 
 function addToCart() {
+  fetch('../cart.php');
   var productID = $("#botao-grande").data('productid');
 
   $.ajax({

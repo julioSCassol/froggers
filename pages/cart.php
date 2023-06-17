@@ -1,10 +1,13 @@
 <?php
+include 'db.php';
+
 function addToCart($productID, $quantity, $orderID) {
     global $conn;
     $sql = "INSERT INTO itens_pedido (quantidade, precoUn, IDprodutos, IDpedidos) VALUES (?, (SELECT preco FROM produtos WHERE id = ?), ?, ?)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("iiii", $quantity, $productID, $productID, $orderID);
     $stmt->execute();
+    $_SESSION['cart'][] = $productID;
 }
 
 function viewCart($orderID) {
@@ -15,7 +18,7 @@ function viewCart($orderID) {
     $stmt->execute();
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) {
-        echo "Product Name: " . $row["nome"]. " - Quantity: " . $row["quantidade"]. " - Price: " . $row["precoUn"]. "<br>";
+        echo "Product Name: " . $row["nome"]. " - Quantity: " . $row["quantidade"]. " - Preco: " . $row["precoUn"]. "<br>";
     }
 }
 
@@ -27,64 +30,45 @@ function checkout($orderID) {
     $stmt->execute();
 }
 
-if (isset($_POST['productID'])) {
-    $productID = $_POST['productID'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['productID'])) {
+        $productID = $_POST['productID'];
 
-    if (!isset($_SESSION['cart'])) {
-        $_SESSION['cart'] = array();
-    }
-
-    $found = false;
-    foreach ($_SESSION['cart'] as $item) {
-        if ($item['id'] == $productID) {
-            $item['quantity']++;
-            $found = true;
-            break;
+        if (!isset($_SESSION['cart'])) {
+            $_SESSION['cart'] = array();
         }
-    }
 
-    if (!$found) {
-        $newItem = array(
-            'id' => $productID,
-            'quantity' => 1
-        );
-        $_SESSION['cart'][] = $newItem;
-    }
-
-    echo "Item added to the cart";
-}
-if (isset($_POST['productID'])) {
-    $productID = $_POST['productID'];
-
-    if (!isset($_SESSION['cart'])) {
-        $_SESSION['cart'] = array();
-    }
-
-    $found = false;
-    foreach ($_SESSION['cart'] as &$item) {
-        if ($item['id'] == $productID) {
-            $item['quantity']++;
-            $found = true;
-            break;
+        $found = false;
+        foreach ($_SESSION['cart'] as &$item) {
+            if ($item['id'] == $productID) {
+                $item['quantity']++;
+                $found = true;
+                break;
+            }
         }
+
+        if (!$found) {
+            $newItem = array(
+                'id' => $productID,
+                'quantity' => 1
+            );
+            $_SESSION['cart'][] = $newItem;
+        }
+
+        $stmt = $conn->prepare("SELECT * FROM produtos WHERE id = ?");
+        $stmt->bind_param("i", $productID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $product = $result->fetch_assoc();
+
+        if ($product) {
+            $price = $product['preco'];
+            $product['preco'] = $price;
+        } else {
+            $product['preco'] = 'N/A';
+        }
+
+        echo json_encode($product);
     }
-
-    if (!$found) {
-        $newItem = array(
-            'id' => $productID,
-            'quantity' => 1
-        );
-        $_SESSION['cart'][] = $newItem;
-    }
-
-    $sql = "SELECT * FROM produtos WHERE id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $productID);
-    $stmt->execute();
-    $product = $stmt->get_result()->fetch_assoc();
-
-    echo json_encode($product);
 }
-
 ?>
-
