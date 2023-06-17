@@ -16,15 +16,14 @@ const pagina = document.querySelector('.pagina');
 pagina.style.minHeight = window.innerHeight + 'px';
 
 document.querySelectorAll('.quadrado').forEach(function(button) {
-    button.addEventListener('click', function() {
-        // remove the clicked class from all buttons
-        document.querySelectorAll('.quadrado').forEach(function(btn) {
-            btn.classList.remove('clicked');
-        });
-        // add the clicked class to the clicked button
-        this.classList.add('clicked');
+  button.addEventListener('click', function() {
+    document.querySelectorAll('.quadrado').forEach(function(btn) {
+      btn.classList.remove('clicked');
     });
+    this.classList.add('clicked');
+  });
 });
+
 function fetchAndDisplayProducts() {
   fetch('nomes.php')
     .then(response => response.json())
@@ -37,12 +36,12 @@ function fetchAndDisplayProducts() {
         catalogItem.className = 'swiper-slide';
         catalogItem.innerHTML = `
           <div class="catalog-item">
-          <a href="/pages/produto-camisetas/index.php?id=${produto.id}">
-            <img src="/assets/camisetas/${produto.nome}.png" alt="${produto.nome}" class="catalog-item-img">
-          </a>
+            <a href="/pages/produto-camisetas/index.php?id=${produto.id}">
+              <img src="/assets/camisetas/${produto.nome}.png" alt="${produto.nome}" class="catalog-item-img">
+            </a>
             <div class="title-wrapper">
               <h3 class="catalog-title">${produto.nome}</h3>
-              <div class="comprar-button" onclick="window.location.href='/pages/produto-camisetas/index.php?id=${produto.id}'">Comprar</div>
+              <div class="comprar-button" onclick="addToCart(${produto.id})">Comprar</div>
               <span class="catalog-price">R$${parseFloat(produto.preco).toFixed(2)}</span>
             </div>
           </div>
@@ -58,27 +57,26 @@ function fetchAndDisplayProducts() {
         });
       });
 
-// Initialize Swiper carousel
-new Swiper('.swiper-container', {
-  slidesPerView: 1,
-  spaceBetween: 20,
-  slidesOffsetAfter: 0,
-  navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev'
-  },
-  breakpoints: {
-    640: {
-      slidesPerView: 2
-    },
-    768: {
-      slidesPerView: 3
-    },
-    1024: {
-      slidesPerView: 4
-    }
-  }
-});
+      new Swiper('.swiper-container', {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        slidesOffsetAfter: 0,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
+        },
+        breakpoints: {
+          640: {
+            slidesPerView: 2
+          },
+          768: {
+            slidesPerView: 3
+          },
+          1024: {
+            slidesPerView: 4
+          }
+        }
+      });
 
     })
     .catch(error => console.error('Error:', error));
@@ -86,44 +84,23 @@ new Swiper('.swiper-container', {
 
 fetchAndDisplayProducts();
 
-function addToCart() {
-  fetch('../cart.php');
-  var productID = $("#botao-grande").data('productid');
-
-  $.ajax({
-    url: '../cart.php',
-    type: 'POST',
-    data: {
-      productID: productID
-    },
-    success: function(produto) {
-      var newCartItem = '<div class="cart-item">';
-      newCartItem += '<div class="product-name">' + produto.nome + '</div>';
-      newCartItem += '<div class="product-quantity">Quantity: 1</div>';
-      newCartItem += '<div class="product-price">Price: ' + produto.preco + '</div>';
-      newCartItem += '</div>';
-
-      $(".cart-catalog").append(newCartItem);
-
-      $('.Sapo-triste').hide();
-    },
-    error: function(jqXHR, textStatus, errorThrown) {
-      console.log(textStatus, errorThrown);
-    }
-  });
+function displayCart() {
+  $.get("../display_cart.php")
+    .done(function(data) {
+      $(".cart-catalog").html(data);
+    });
 }
 
+function addToCart(id) {
+  $('.Sapo-triste').hide();
+  $.post("../add_to_cart.php", { id: id })
+    .done(function(data) {
+      console.log("Item added to cart");
+      displayCart();
+    });
+}
+
+// Call displayCart() when the page is loaded to display initial cart items
 $(document).ready(function() {
-  $.ajax({
-    url: '../getCartCount.php',
-    type: 'GET',
-    success: function(count) {
-      if(count > 0) {
-        $('.Sapo-triste').hide();
-      }
-    },
-    error: function(jqXHR, textStatus, errorThrown) {
-      console.log(textStatus, errorThrown);
-    }
-  });
+  displayCart();
 });

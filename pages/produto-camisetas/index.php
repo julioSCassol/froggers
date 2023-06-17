@@ -1,9 +1,7 @@
 <?php
-include '../db.php';
+
 session_start();
-
-$id = $_GET['id'];
-
+include '../db.php';
 function getprodutoByID($id)
 {
     global $conn;
@@ -14,13 +12,13 @@ function getprodutoByID($id)
     return $result->fetch_assoc();
 }
 
+$id = $_GET['id'];
 $produto = getprodutoByID($id);
 
 if (empty($produto)) {
     echo '<script>alert("Produto não encontrado!");history.back();</script>';
     exit;
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -77,7 +75,9 @@ if (empty($produto)) {
                             <img src="/assets/images/Sapo-triste.png" alt="Sapo-triste">
                         </div>
                         <div class="cart-catalog">
+                            <?php include 'display_cart.php'; ?>
                         </div>
+
                         <div id="menu-footer">
                             Bem vindo,
                             <span><?php echo $_SESSION['username']; ?></span>
@@ -130,7 +130,7 @@ if (empty($produto)) {
                         <span class="letra">GG</span>
                     </button>
                 </div>
-                <button class="descricao-imagem" id="botao-grande" data-productid="<?= $produto['id'] ?>" onclick="addToCart()">Adicionar ao carrinho</button>
+                <button class="descricao-imagem" id="botao-grande" data-productid="<?= $produto['id'] ?>" onclick="addToCart(this.getAttribute('data-productid'))">Adicionar ao carrinho</button>
             </div>
         </div>
         <div class="catalog-container">
@@ -143,10 +143,6 @@ if (empty($produto)) {
             </div>
         </div>
 </div>
-
-
-
-
 
         <footer>
             <div class="Atendimento">

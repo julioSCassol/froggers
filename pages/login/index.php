@@ -16,10 +16,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $isUserLoggedIn = true;
         $userData = mysqli_fetch_assoc($resultado);
         $_SESSION['username'] = $userData['nome'];
+        $_SESSION['IDcliente'] = $userData['id'];
     } else {
         echo '<script>alert("Email e/ou senha incorretos!");</script>';
     }
+    if (!$resultado) {
+        printf("Error: %s\n", mysqli_error($conn));
+        exit();
+    }
 }
+
 ?>
 
 <!DOCTYPE html>
