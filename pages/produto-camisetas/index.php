@@ -78,8 +78,6 @@ if (empty($produto)) {
                         </div>
 
                         <div id="menu-footer">
-                            <span><?php echo $_SESSION['username']; ?></span>
-                            <br>
                             <span id="continue-shopping" class="carrinho-vazio"><u>Continuar Comprando</u></span>
                         </div>
 
