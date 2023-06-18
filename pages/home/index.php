@@ -53,7 +53,6 @@ session_start();
                         <div class="Sapo-triste">
                             <img src="/assets/images/Sapo-triste.png" alt="Sapo-triste">
                             </div>
-                        <span><?php echo $_SESSION['username']; ?></span>
                         <span id="continue-shopping" class="carrinho-vazio"><u>Continuar Comprando</u></span>
                     </div>
                     

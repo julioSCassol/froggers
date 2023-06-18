@@ -18,8 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         } else {
             $sql = "INSERT INTO clientes (nome, email, senha) VALUES ('$nome', '$email', '$senha')";
             if ($conn->query($sql) === TRUE) {
-                header("Location: ../login/index.php"); // Redirect the user to login page
-                exit(); // exit the script after redirection
+                header("Location: ../login/index.php");
+                exit();
             } else {
                 echo "Error: " . $sql . "<br>" . $conn->error;
             }
