@@ -5,27 +5,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
     $senha = $_POST['password'];
     $senha_confirmada = $_POST['confirm_password'];
-    $captcha = $_POST['captcha'];
-    $captcha_result = $_POST['captcha_result'];
+    $captchaChecked = isset($_POST["show-captcha"]);
 
-    if (empty($nome) || empty($email) || empty($senha) || empty($senha_confirmada)) {
-        echo '<script>alert("Por favor preencha todos os campos");</script>';
+    if (!$captchaChecked) {
+        echo '<script>alert("Please verify the CAPTCHA!");</script>';
     } else {
-        if ($senha != $senha_confirmada) {
-            echo '<script>alert("As senhas não coincidem!");</script>';
-        } else if ($captcha != $captcha_result) {
-            echo '<script>alert("Resultado do captcha incorreto.");</script>';
+        $captchaResult = (int) $_POST["captcha_result"];
+        $userCaptcha = (int) $_POST["captcha"];
+
+        if ($userCaptcha !== $captchaResult) {
+            echo '<script>alert("CAPTCHA answer is incorrect!");</script>';
         } else {
             $sql = "INSERT INTO clientes (nome, email, senha) VALUES ('$nome', '$email', '$senha')";
             if ($conn->query($sql) === TRUE) {
-                echo '<script>alert("Registration successful!!");</script>';
+                header("Location: ../login/index.php"); // Redirect the user to login page
+                exit(); // exit the script after redirection
             } else {
                 echo "Error: " . $sql . "<br>" . $conn->error;
             }
         }
     }
-    $conn->close();
 }
+
 ?>
 
 
@@ -111,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                     <div class="checkbox-div">
                     <label class="custom-checkbox"> 
-                        <input type="checkbox" id="show-captcha"> 
+                    <input type="checkbox" id="show-captcha" name="show-captcha">
                         <span id="CAPTCHA">CAPTCHA</span> 
                         <span class="checkmark"></span>
                     </label>

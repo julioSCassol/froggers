@@ -7,8 +7,6 @@ function toggleMenu() {
     slidingMenu.classList.add('menu-closed');
   }
 }
-
-
 window.onload = function() {
   document.getElementById('show-captcha').addEventListener('change', function() {
       if (this.checked) {

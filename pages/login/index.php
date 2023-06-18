@@ -1,30 +1,43 @@
 <?php
 session_start();
 include '../db.php';
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST["email"];
     $senha = $_POST["password"];
+    $captchaChecked = isset($_POST["show-captcha"]);
 
-    $sql = "SELECT * FROM clientes WHERE email = '$email' AND senha = '$senha'";
-
-    $resultado = mysqli_query($conn, $sql);
-
-    $isUserLoggedIn = false;
-
-    if ($resultado && mysqli_num_rows($resultado) > 0) {
-        $isUserLoggedIn = true;
-        $userData = mysqli_fetch_assoc($resultado);
-        $_SESSION['username'] = $userData['nome'];
-        $_SESSION['IDcliente'] = $userData['id'];
+    if (!$captchaChecked) {
+        echo '<script>alert("Por favor marque o CAPTCHA!");</script>';
     } else {
-        echo '<script>alert("Email e/ou senha incorretos!");</script>';
-    }
-    if (!$resultado) {
-        printf("Error: %s\n", mysqli_error($conn));
-        exit();
+        $captchaResult = (int) $_POST["captcha_result"];
+        $userCaptcha = (int) $_POST["captcha"];
+
+        if ($userCaptcha !== $captchaResult) {
+            echo '<script>alert("CAPTCHA está incorreto!");</script>';
+        } else {
+            $sql = "SELECT * FROM clientes WHERE email = '$email' AND senha = '$senha'";
+            $resultado = mysqli_query($conn, $sql);
+            $isUserLoggedIn = false;
+
+            if ($resultado && mysqli_num_rows($resultado) > 0) {
+                $isUserLoggedIn = true;
+                $userData = mysqli_fetch_assoc($resultado);
+                $_SESSION['username'] = $userData['nome'];
+                $_SESSION['IDcliente'] = $userData['id'];
+
+                header('Location: ../home/index.php');
+                exit();
+            } else {
+                echo '<script>alert("Email e/ou senha incorretos!");</script>';
+            }
+            if (!$resultado) {
+                printf("Error: %s\n", mysqli_error($conn));
+                exit();
+            }
+        }
     }
 }
+
 
 ?>
 
@@ -100,12 +113,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
                         <div class="form-container">
                 <img src="/assets/images/logo-completa.png" alt="logo-login">
-                <form class="login-form" action="./verify.php" method="post">
+                <form class="login-form" action="./index.php" method="post">
+                <!-- <form class="login-form" action="./verify.php" method="post"> -->
+
                     <input type="email" name="email" placeholder="Email">
                     <input type="password" name="password" placeholder="Senha">
                     <div class="checkbox-div">
                         <label class="custom-checkbox"> 
-                            <input type="checkbox" id="show-captcha"> 
+                        <input type="checkbox" id="show-captcha" name="show-captcha">
                             <span id="CAPTCHA">CAPTCHA</span> 
                             <span class="checkmark"></span>
                         </label>

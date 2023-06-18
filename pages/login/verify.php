@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-$conn = mysqli_connect("Luiz", "picoli", "lolmolpp", "froggers");
+$conn = mysqli_connect("localhost", "ota", "password", "froggers");
 
 if (!$conn) {
     die("Falha na conexão: " . mysqli_connect_error());
@@ -33,7 +33,7 @@ exit();
 } else {
   
     $_SESSION['error_message'] = "Email e/ou senha incorretos!";
-    header('Location: /froggers-main/pages/login/index.html');
+    header('Location: /pages/login/index.php');
 }
 
 mysqli_close($conn);
