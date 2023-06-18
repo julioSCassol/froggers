@@ -256,7 +256,7 @@ align-items: center;
   padding: 5px;
   color: var(--cinza-froggers);
   font-weight: 500;
-  margin-bottom: 0; /* Add this line */
+  margin-bottom: 0; 
 }
 
 .catalog-price {
