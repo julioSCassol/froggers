@@ -98,24 +98,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </a>
                 </div>
             </div>
-
-            <div class="form-container">
+                        <div class="form-container">
                 <img src="/assets/images/logo-completa.png" alt="logo-login">
-                <form class="login-form" action="./index.php" method="post">
+                <form class="login-form" action="./verify.php" method="post">
                     <input type="email" name="email" placeholder="Email">
                     <input type="password" name="password" placeholder="Senha">
                     <div class="checkbox-div">
                         <label class="custom-checkbox"> 
+                            <input type="checkbox" id="show-captcha"> 
                             <span id="CAPTCHA">CAPTCHA</span> 
-                            <input type="checkbox">
                             <span class="checkmark"></span>
                         </label>
+                    </div>
+                    <div id="captcha-container" style="display: none;">
+                        <input type="hidden" name="captcha_result" id="captcha_result">
+                        <div id="captcha"></div>
+                        <input type="text" name="captcha" placeholder="Digite o resultado">
                     </div>
                     <button type="submit">Login</button>
                     <a id="cadastrese" href="/pages/cadastro/index.php">Não possui cadastro? clique aqui e cadastre-se!</a>
                 </form>
             </div>
-
     
         </div>
         

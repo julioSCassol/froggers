@@ -27,7 +27,9 @@ if ($resultado && mysqli_num_rows($resultado) > 0) {
     mysqli_query($conn, $query);
     setcookie('auth_token', $token, time() + 60 * 60 * 24 * 30, '/');
 
-    header('Location: /froggers-main/pages/camisetas/index.php');
+    header('Location: /pages/home/index.php');
+exit();
+
 } else {
   
     $_SESSION['error_message'] = "Email e/ou senha incorretos!";

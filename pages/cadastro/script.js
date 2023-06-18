@@ -7,6 +7,8 @@ function toggleMenu() {
     slidingMenu.classList.add('menu-closed');
   }
 }
+
+
 window.onload = function() {
   document.getElementById('show-captcha').addEventListener('change', function() {
       if (this.checked) {
@@ -22,6 +24,17 @@ window.onload = function() {
       }
   });
 }
+document.querySelector('.login-form').addEventListener('submit', function(event) {
+  const nome = document.querySelector('input[name="name"]');
+  const email = document.querySelector('input[name="email"]');
+  const senha = document.querySelector('input[name="password"]');
+  const senha_confirmada = document.querySelector('input[name="confirm_password"]');
+
+  if (!nome.value || !email.value || !senha.value || !senha_confirmada.value) {
+      event.preventDefault();
+      alert("Por favor preencha todos os campos");
+  }
+});
 
 
 
