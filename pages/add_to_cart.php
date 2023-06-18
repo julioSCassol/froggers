@@ -29,26 +29,21 @@ if(!isset($_SESSION['cart'])){
     $_SESSION['cart'] = array();
 }
 
-$stmt = $conn->prepare("INSERT INTO itens_pedido (quantidade, precoUn, IDprodutos, IDpedidos) VALUES (?, ?, ?, ?)");
-$stmt->bind_param('idii', $quantidade, $precoUn, $id, $IDpedido);
+$stmt = $conn->prepare("INSERT INTO itens_pedido (quantidade, precoUn, IDprodutos, IDpedidos) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE quantidade = ?");
+$stmt->bind_param('idiii', $quantidade, $precoUn, $id, $IDpedido, $quantidade);
 $result = $stmt->execute();
 
-if(isset($_SESSION['cart'])){
-    $_SESSION['cart'][$id]=array(
+if (isset($_SESSION['cart'][$id])) {
+    $_SESSION['cart'][$id]['quantidade'] += $quantidade;
+} else {
+    $_SESSION['cart'][$id] = array(
         "quantidade" => $quantidade,
         "precoUn" => $precoUn,
         "id" => $id,
         "IDpedido" => $IDpedido
     );
 }
-else{
-    $_SESSION['cart']=array();
-    $_SESSION['cart'][$id]=array(
-        "quantidade" => $quantidade,
-        "precoUn" => $precoUn,
-        "id" => $id,
-        "IDpedido" => $IDpedido
-    );
-}
+
+
 
 ?>

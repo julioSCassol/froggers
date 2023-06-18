@@ -35,4 +35,5 @@ while ($row = $result->fetch_assoc()) {
     echo '<button class="remove-item" data-productid="' . $id . '" onclick="removeItemFromCart(this.getAttribute(\'data-productid\'))">Remover</button>';
     echo '</div>';
 }
+
 ?>

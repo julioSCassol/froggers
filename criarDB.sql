@@ -39,6 +39,8 @@ CREATE TABLE itens_pedido(
     IDprodutos INT,
     IDpedidos INT,
     PRIMARY KEY(id),
+    UNIQUE KEY item_pedido_unique (IDprodutos, IDpedidos),
     FOREIGN KEY(IDprodutos) REFERENCES produtos(id),
     FOREIGN KEY(IDpedidos) REFERENCES pedidos(id)
 );
+
