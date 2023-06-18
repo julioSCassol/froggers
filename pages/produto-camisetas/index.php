@@ -75,7 +75,6 @@ if (empty($produto)) {
                             <img src="/assets/images/Sapo-triste.png" alt="Sapo-triste">
                         </div>
                         <div class="cart-catalog">
-                            <?php include 'display_cart.php'; ?>
                         </div>
 
                         <div id="menu-footer">

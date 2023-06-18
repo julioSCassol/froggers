@@ -41,5 +41,23 @@ $stmt = $conn->prepare("INSERT INTO itens_pedido (quantidade, precoUn, IDproduto
 $stmt->bind_param('idii', $quantidade, $precoUn, $id, $IDpedido);
 $result = $stmt->execute();
 
+// Inserting into cart array.
+if(isset($_SESSION['cart'])){
+    $_SESSION['cart'][$id]=array(
+        "quantidade" => $quantidade,
+        "precoUn" => $precoUn,
+        "id" => $id,
+        "IDpedido" => $IDpedido
+    );
+}
+else{
+    $_SESSION['cart']=array();
+    $_SESSION['cart'][$id]=array(
+        "quantidade" => $quantidade,
+        "precoUn" => $precoUn,
+        "id" => $id,
+        "IDpedido" => $IDpedido
+    );
+}
 
 ?>
