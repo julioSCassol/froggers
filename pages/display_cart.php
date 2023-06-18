@@ -30,8 +30,9 @@ while ($row = $result->fetch_assoc()) {
 
     echo '<div class="cart-item">';
     echo '<p>' . $row['nome'] . '</p>';
-    echo '<p>Quantity: ' . $quantidade . '</p>';
-    echo '<p>Price: ' . $row['preco'] . '</p>';
+    echo '<p>Quantidade: ' . $quantidade . '</p>';
+    echo '<p>Preço: ' . $row['preco'] . '</p>';
+    echo '<button class="remove-item" data-productid="' . $id . '" onclick="removeItemFromCart(this.getAttribute(\'data-productid\'))">Remover</button>';
     echo '</div>';
 }
 ?>

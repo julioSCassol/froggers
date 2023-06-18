@@ -78,7 +78,6 @@ if (empty($produto)) {
                         </div>
 
                         <div id="menu-footer">
-                            Bem vindo,
                             <span><?php echo $_SESSION['username']; ?></span>
                             <br>
                             <span id="continue-shopping" class="carrinho-vazio"><u>Continuar Comprando</u></span>
@@ -135,7 +134,6 @@ if (empty($produto)) {
         <div class="catalog-container">
             <div class="swiper-container">
               <div class="swiper-wrapper">
-                <!-- Catalog items go here -->
               </div>
               <div class="swiper-button-next"></div>
               <div class="swiper-button-prev"></div>

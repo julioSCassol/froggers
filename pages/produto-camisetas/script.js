@@ -87,20 +87,43 @@ fetchAndDisplayProducts();
 function displayCart() {
   $.get("../display_cart.php")
     .done(function(data) {
-      $(".cart-catalog").html(data);
+      if (data) {
+        $('.Sapo-triste').hide();
+        // Se a resposta não for vazia, inserir a resposta na cart-catalog.
+        $(".cart-catalog").html(data);
+      } else {
+        $('.Sapo-triste').show();
+        // Se a resposta for vazia, fazer algo apropriado.
+        // Por exemplo, você pode mostrar uma mensagem para o usuário informando que o carrinho está vazio.
+        $(".cart-catalog").html("O carrinho está vazio.");
+      }
     });
 }
 
+
 function addToCart(id) {
-  $('.Sapo-triste').hide();
+
   $.post("../add_to_cart.php", { id: id })
     .done(function(data) {
       console.log("Item added to cart");
       displayCart();
     });
 }
+//...
+
+function removeItemFromCart(id) {
+  $.post("../remove_from_cart.php", { id: id })
+      .done(function(data) {
+          console.log("Item removed from cart");
+          displayCart();
+      });
+}
+
+
 
 // Call displayCart() when the page is loaded to display initial cart items
 $(document).ready(function() {
   displayCart();
 });
+
+

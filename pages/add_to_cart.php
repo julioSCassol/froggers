@@ -4,7 +4,6 @@ ini_set('display_errors', 1);
 include 'pedido.php';
 include 'db.php';
 
-// get the product id
 $id = isset($_POST['id']) ? $_POST['id'] : "";
 $IDcliente = isset($_SESSION['IDcliente']) ? $_SESSION['IDcliente'] : "";
 $IDpedido = isset($_SESSION['IDpedido']) ? $_SESSION['IDpedido'] : "";
@@ -25,14 +24,7 @@ echo "<script>alert('Item inserted successfully. IDcliente: " . $IDcliente . "')
 $quantidade = 1;
 $precoUn = $produto['preco'];
 
-// $stmt = $conn->prepare("SELECT id from pedidos WHERE IDcliente = ?");
-// $stmt->bind_param('i', $IDcliente);
-// $stmt->execute();
-// $result = $stmt->get_result();
-// $row = $result->fetch_assoc();
-// $idpedido = $row['id'];
 
-// check if the 'cart' session array was created
 if(!isset($_SESSION['cart'])){
     $_SESSION['cart'] = array();
 }
@@ -41,7 +33,6 @@ $stmt = $conn->prepare("INSERT INTO itens_pedido (quantidade, precoUn, IDproduto
 $stmt->bind_param('idii', $quantidade, $precoUn, $id, $IDpedido);
 $result = $stmt->execute();
 
-// Inserting into cart array.
 if(isset($_SESSION['cart'])){
     $_SESSION['cart'][$id]=array(
         "quantidade" => $quantidade,

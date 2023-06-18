@@ -5,12 +5,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
     $senha = $_POST['password'];
     $senha_confirmada = $_POST['confirm_password'];
+    $captcha = $_POST['captcha'];
+    $captcha_result = $_POST['captcha_result'];
 
     if (empty($nome) || empty($email) || empty($senha) || empty($senha_confirmada)) {
         echo '<script>alert("Por favor preencha todos os campos");</script>';
     } else {
         if ($senha != $senha_confirmada) {
             echo '<script>alert("As senhas não coincidem!");</script>';
+        } else if ($captcha != $captcha_result) {
+            echo '<script>alert("Resultado do captcha incorreto.");</script>';
         } else {
             $sql = "INSERT INTO clientes (nome, email, senha) VALUES ('$nome', '$email', '$senha')";
             if ($conn->query($sql) === TRUE) {
@@ -23,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $conn->close();
 }
 ?>
+
 
 
 <!DOCTYPE html>
@@ -104,23 +109,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <input type="password" placeholder="Senha" name="password">
                         <input type="password" placeholder="Repetir Senha" name="confirm_password">                       
                     </div>
-
                     <div class="checkbox-div">
-                        <label class="custom-checkbox"> 
-                            <span id="CAPTCHA">CAPTCHA</span> 
-                            <input type="checkbox">
-                            <span class="checkmark"></span>
-                        </label>
+                    <label class="custom-checkbox"> 
+                        <input type="checkbox" id="show-captcha"> 
+                        <span id="CAPTCHA">CAPTCHA</span> 
+                        <span class="checkmark"></span>
+                    </label>
                     </div>
-                    <button type="submit">Login</button>
+                        <div id="captcha-container" style="display: none;">
+                            <input type="hidden" name="captcha_result" id="captcha_result">
+                        <div id="captcha"></div>
+                            <input type="text" name="captcha" placeholder="Digite o resultado">
+                        </div>
+                        <button type="submit">Registrar</button>
                     <a id=cadastrado href="/pages/login/index.php">Já é cadastrado? Clique aqui para efetuar o login!</a>
-                    
                 </form>
             </div>
-
-    
-        </div>
-        
+        </div>   
         <footer>
             <div class="Atendimento">
                 Atendimento:
