@@ -189,14 +189,18 @@ body {
     padding-top: 38px;
   }
   .redes_footer{
-  gap: 10px;
-  display: flex;
-  flex-direction: column;
-  }
-  .redes{
-  width: 100px;
-  height: auto;
-  }
+    gap: 5px;
+    display: flex;
+    flex-direction: column;
+    }
+    .redes{
+    width: 55px;
+    height: 55px;
+    }
+  
+    .imagens-divlegal{
+      float: left;
+    }
   .Itens{
   margin-top: 10px;
   font-weight: 100;

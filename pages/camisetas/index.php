@@ -105,7 +105,14 @@ include '../db.php';
             </div>
             <div class="redes_footer">
                 Siga nossas redes:
-                <img class="redes" src="/assets/images/redes.png" alt="redes">
+                <div class= "imagens-divlegal">
+                <a href="https://www.instagram.com/froggersoficial/">
+                <img class="redes" src="/assets/images/logo-instagram.png" alt="redes">
+                </a> 
+                <a href="https://twitter.com/FroggersOFC">
+                <img class="redes" src="/assets/images/logo-twitter.png" alt="redes">
+                </a>  
+                </div>
             </div>
             <div class="Ajuda">
                 Ajuda:
