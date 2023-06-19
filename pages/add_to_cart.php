@@ -7,7 +7,6 @@ include 'db.php';
 $id = isset($_POST['id']) ? $_POST['id'] : "";
 $IDcliente = isset($_SESSION['IDcliente']) ? $_SESSION['IDcliente'] : "";
 $IDpedido = isset($_SESSION['IDpedido']) ? $_SESSION['IDpedido'] : "";
-
 function getprodutoByID($id)
 {
     global $conn;
@@ -20,31 +19,23 @@ function getprodutoByID($id)
 
 $produto = getprodutoByID($id);
 
-if (!$produto) {
-
-    echo "<script>alert('Produto não encontrado.');</script>";
-    exit;
-}
+echo "<script>alert('Item inserted successfully. IDcliente: " . $IDcliente . "');</script>";
 
 $quantidade = 1;
 $precoUn = $produto['preco'];
 
 
-if ($quantidade > $produto['quantidade']) {
-    echo "<script>alert('Quantidade indisponível. Apenas " . $produto['quantidade'] . " unidades disponíveis.');</script>";
-    exit;
-}
-
-if (!isset($_SESSION['cart'])) {
+if(!isset($_SESSION['cart'])){
     $_SESSION['cart'] = array();
 }
 
+$stmt = $conn->prepare("INSERT INTO itens_pedido (quantidade, precoUn, IDprodutos, IDpedidos) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE quantidade = ?");
+$stmt->bind_param('idiii', $quantidade, $precoUn, $id, $IDpedido, $quantidade);
+$result = $stmt->execute();
 
 if (isset($_SESSION['cart'][$id])) {
-
     $_SESSION['cart'][$id]['quantidade'] += $quantidade;
 } else {
-
     $_SESSION['cart'][$id] = array(
         "quantidade" => $quantidade,
         "precoUn" => $precoUn,
@@ -54,10 +45,5 @@ if (isset($_SESSION['cart'][$id])) {
 }
 
 
-$novaQuantidade = $produto['quantidade'] - $quantidade;
-$stmt = $conn->prepare("UPDATE produtos SET quantidade = ? WHERE id = ?");
-$stmt->bind_param('ii', $novaQuantidade, $id);
-$result = $stmt->execute();
 
-echo "<script>alert('Item inserido com sucesso. IDcliente: " . $IDcliente . "');</script>";
 ?>

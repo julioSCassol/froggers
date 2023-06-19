@@ -106,8 +106,15 @@ function displayCart() {
 }
 
 
+function addToCart(id, quantity) {
+  console.log(quantity);
+  quantity = parseInt(quantity);
+  var productInCart = id;
 
-function addToCart(id) {
+  if (productInCart && productInCart.quantity >= quantity) {
+    alert('Você não pode adicionar mais deste produto, a quantidade disponível já está no seu carrinho.');
+    return;
+  }
 
   $.post("../add_to_cart.php", { id: id })
     .done(function(data) {
@@ -115,6 +122,7 @@ function addToCart(id) {
       displayCart();
     });
 }
+
 
 function removeItemFromCart(id) {
   $.post("../remove_from_cart.php", { id: id })

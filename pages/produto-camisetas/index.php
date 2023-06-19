@@ -15,7 +15,6 @@ function getprodutoByID($id)
 $id = $_GET['id'];
 $produto = getprodutoByID($id);
 
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -122,9 +121,9 @@ $produto = getprodutoByID($id);
                         <span class="letra">GG</span>
                     </button>
                 </div>
-                <button class="descricao-imagem" id="botao-grande" data-productid="<?= $produto['id'] ?>" onclick="addToCart(this.getAttribute('data-productid'))">Adicionar ao carrinho</button>
+                <button class="descricao-imagem" id="botao-grande" data-productid="<?= $produto['id'] ?>" data-quantity="<?= $produto['quantidade'] ?>" onclick="addToCart(this.getAttribute('data-productid'), 5)">Adicionar ao carrinho</button>
                 <p class="descricao-imagem" id="quantidade-produto">Quantidade Disponível: <?= $produto['quantidade'] ?></p>
-            
+
             </div>
         </div>
         <div class="catalog-container">
