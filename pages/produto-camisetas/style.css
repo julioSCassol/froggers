@@ -76,9 +76,9 @@ body {
 #topper {
   height: 5.3vh;
   background-color: rgba(233, 233, 233, 1);
-  display: flex; /* Add this line */
-justify-content: center; /* Add this line */
-align-items: center; /* Add this line */
+  display: flex;
+justify-content: center; 
+align-items: center;
 }
 
 #coisas-que-vende {
@@ -157,8 +157,11 @@ font-weight: 100;
 .Itens div{
 margin-bottom: 10px;
 }
+
 #menu-footer {
-  align-self: flex-end;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 
@@ -184,14 +187,8 @@ justify-content: space-between;
 transform: translateX(100%);
 }
 
-#header-menu{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-}
-
 .carrinho-vazio{
+  text-align: center;
   font-weight: 300;
   cursor: pointer;
 }
@@ -200,8 +197,8 @@ transform: translateX(100%);
   font-size: 3vh;
   top: 20px;
   right: 20px;
-  margin-left: 10px;
   cursor: pointer;
+  text-align: right;
 }
 
 #overlay {
@@ -219,13 +216,6 @@ transition: opacity 0.5s;
 pointer-events: none;
 opacity: 0;
 transition: opacity 0.5s;
-}
-
-.Sapo-triste {
-display: flex;
-justify-content: center;
-align-items: center;
-height: 87%; 
 }
 
 img[alt="Sapo-triste"]{
@@ -424,11 +414,11 @@ align-items: center;
 }
 .swiper-wrapper {
   display: flex;
-  align-items: flex-start; /* Add this line */
+  align-items: flex-start;
 }
 
 .swiper-slide {
-  margin-right: 20px; /* Adjust the value as needed */
+  margin-right: 20px; 
 }
 
 .swiper-button-next {
@@ -500,4 +490,63 @@ align-items: center;
 
 .catalog-item:hover .comprar-button {
   opacity: 1;
+}
+
+#menu-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+#sliding-menu {
+position: fixed;
+top: 0;
+right: 0;
+width: 250px;
+height: 100%;
+background-color: rgba(255, 255, 255, 1);
+overflow-x: hidden;
+transition: 0.5s;
+z-index: 1;
+padding: 20px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: space-between;
+
+}
+
+.menu-closed {
+transform: translateX(100%);
+}
+
+.carrinho-vazio{
+  text-align: center;
+  font-weight: 300;
+  cursor: pointer;
+}
+
+#close-menu {
+  font-size: 3vh;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  text-align: right;
+}
+
+
+
+.Sapo-triste {
+display: flex;
+justify-content: center;
+align-items: center;
+height: 87%; 
+}
+.produtos-relacionadostxt{
+  color: var(--verde-froggers);
+  padding-bottom: 20px;
+}
+.swiper-container {
+  overflow-x: hidden;
 }

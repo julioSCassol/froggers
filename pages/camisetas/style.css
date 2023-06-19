@@ -158,31 +158,37 @@ font-weight: 100;
 margin-bottom: 10px;
 }
 
-
-#sliding-menu {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 250px;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 1);
-  overflow-x: hidden;
-  transition: 0.5s;
-  z-index: 1000;
-  padding: 20px;
+#menu-footer {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-#header-menu{
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
+#sliding-menu {
+position: fixed;
+top: 0;
+right: 0;
+width: 250px;
+height: 100%;
+background-color: rgba(255, 255, 255, 1);
+overflow-x: hidden;
+transition: 0.5s;
+z-index: 1;
+padding: 20px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: space-between;
 
 }
 
+.menu-closed {
+transform: translateX(100%);
+}
+
 .carrinho-vazio{
+  text-align: center;
   font-weight: 300;
   cursor: pointer;
 }
@@ -191,13 +197,11 @@ margin-bottom: 10px;
   font-size: 3vh;
   top: 20px;
   right: 20px;
-  margin-left: 10px;
   cursor: pointer;
+  text-align: right;
 }
 
-.menu-closed {
-transform: translateX(100%);
-}
+
 
 .Sapo-triste {
 display: flex;

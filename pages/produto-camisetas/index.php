@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 include '../db.php';
 function getprodutoByID($id)
@@ -71,16 +70,12 @@ if (empty($produto)) {
                         <div id="header-menu">
                             <i id="close-menu" class="material-icons">clear</i>
                         </div>
-                        <div class="Sapo-triste">
-                            <img src="/assets/images/Sapo-triste.png" alt="Sapo-triste">
-                        </div>
+
                         <div class="cart-catalog">
                         </div>
-
                         <div id="menu-footer">
                             <span id="continue-shopping" class="carrinho-vazio"><u>Continuar Comprando</u></span>
                         </div>
-
                     </div>
                     
                 </div>
@@ -130,6 +125,7 @@ if (empty($produto)) {
             </div>
         </div>
         <div class="catalog-container">
+            <h1 class= "produtos-relacionadostxt">Produtos Relacionados</h1>
             <div class="swiper-container">
               <div class="swiper-wrapper">
               </div>
@@ -170,6 +166,7 @@ if (empty($produto)) {
             </div>
 
         </footer> 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="script.js"></script>
     </body>
 </html>

@@ -42,3 +42,35 @@ document.getElementById('close-menu').addEventListener('click', toggleMenu);
 
 const pagina = document.querySelector('.pagina');
 pagina.style.minHeight = window.innerHeight + 'px';
+
+function displayCart() {
+  $.get("../display_cart.php")
+    .done(function(data) {
+      if (data) {
+        console.log(data);
+        $(".cart-catalog").html(data);
+      } else {
+        $(".cart-catalog").html("O carrinho está vazio.");
+      }
+    });
+}
+function addToCart(id) {
+
+  $.post("../add_to_cart.php", { id: id })
+    .done(function(data) {
+      console.log("Item added to cart");
+      displayCart();
+    });
+}
+
+function removeItemFromCart(id) {
+  $.post("../remove_from_cart.php", { id: id })
+      .done(function(data) {
+          console.log("Item removed from cart");
+          displayCart();
+      });
+}
+
+$(document).ready(function() {
+  displayCart();
+});

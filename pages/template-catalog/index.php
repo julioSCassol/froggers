@@ -45,15 +45,15 @@
                     </div>
                     <div id="sliding-menu" class="menu-closed">
                         <div id="header-menu">
-                            <span class="carrinho-vazio">Seu carrinho está vazio!</span>
                             <i id="close-menu" class="material-icons">clear</i>
                         </div>
-                        <div class="Sapo-triste">
-                            <img src="/assets/images/Sapo-triste.png" alt="Sapo-triste">
+
+                        <div class="cart-catalog">
                         </div>
-                        <span id="continue-shopping" class="carrinho-vazio"><u>Continuar Comprando</u></span>
+                        <div id="menu-footer">
+                            <span id="continue-shopping" class="carrinho-vazio"><u>Continuar Comprando</u></span>
+                        </div>
                     </div>
-                    
                 </div>
 
                 <div id="coisas-que-vende">
@@ -123,6 +123,7 @@
             </div>
         </footer> 
         <div id="overlay" class="overlay-hidden"></div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="script.js"></script>
     </body>   
     

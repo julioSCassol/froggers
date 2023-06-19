@@ -50,3 +50,13 @@
     height: auto;
     display: block;
   }
+  .Sapo-triste {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 87%;
+    color: var(--cinza-froggers);
+    gap: 20px;
+  }
+    

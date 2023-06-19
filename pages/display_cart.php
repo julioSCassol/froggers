@@ -17,7 +17,10 @@ $IDcliente = isset($_SESSION['IDcliente']) ? $_SESSION['IDcliente'] : "";
 <?php
 
 if (!isset($_SESSION['cart']) || empty($_SESSION['cart'])) {
-    echo '<p>O Carrinho está vazio!.</p>';
+    echo '<div class="Sapo-triste">
+            <img src="/assets/images/Sapo-triste.png" alt="Sapo-triste">
+            <p>Carrinho Vazio!</p>
+          </div>';
     exit;
 }
 
@@ -48,9 +51,7 @@ while ($row = $result->fetch_assoc()) {
     echo '</div>';
     
 }
-// <img src="/assets/camisetas/${produto.nome}.png" alt="${produto.nome}" class="catalog-item-img">
-// </a>            <div class="title-wrapper">
-//   <h3 class="catalog-title">${produto.nome}</h3>
+
 ?>
 </body>
 </html>

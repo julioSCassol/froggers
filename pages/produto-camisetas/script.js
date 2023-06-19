@@ -1,8 +1,10 @@
 function toggleMenu() {
   const slidingMenu = document.getElementById('sliding-menu');
+  $(".swiper-button-next").show();
 
   if (slidingMenu.classList.contains('menu-closed')) {
     slidingMenu.classList.remove('menu-closed');
+    $(".swiper-button-next").hide();
   } else {
     slidingMenu.classList.add('menu-closed');
   }
@@ -25,12 +27,18 @@ document.querySelectorAll('.quadrado').forEach(function(button) {
 });
 
 function fetchAndDisplayProducts() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const viewedProductId = urlParams.get('id');
+
   fetch('nomes.php')
     .then(response => response.json())
     .then(produtos => {
       const catalog = document.querySelector('.swiper-wrapper');
 
       produtos.forEach(produto => {
+        if (produto.id === viewedProductId) {
+          return;
+        }
         const catalogItem = document.createElement('div');
 
         catalogItem.className = 'swiper-slide';
@@ -88,13 +96,8 @@ function displayCart() {
   $.get("../display_cart.php")
     .done(function(data) {
       if (data) {
-        $('.Sapo-triste').hide();
-        // Se a resposta não for vazia, inserir a resposta na cart-catalog.
         $(".cart-catalog").html(data);
       } else {
-        $('.Sapo-triste').show();
-        // Se a resposta for vazia, fazer algo apropriado.
-        // Por exemplo, você pode mostrar uma mensagem para o usuário informando que o carrinho está vazio.
         $(".cart-catalog").html("O carrinho está vazio.");
       }
     });
@@ -105,25 +108,19 @@ function addToCart(id) {
 
   $.post("../add_to_cart.php", { id: id })
     .done(function(data) {
-      console.log("Item added to cart");
+      console.log("Item adicionado ao carrinho");
       displayCart();
     });
 }
-//...
 
 function removeItemFromCart(id) {
   $.post("../remove_from_cart.php", { id: id })
       .done(function(data) {
-          console.log("Item removed from cart");
+          console.log("Item removido do carrinho");
           displayCart();
       });
 }
 
-
-
-// Call displayCart() when the page is loaded to display initial cart items
 $(document).ready(function() {
   displayCart();
 });
-
-

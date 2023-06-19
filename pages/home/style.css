@@ -324,3 +324,55 @@
   margin-right: 10px;
 }
 
+
+#menu-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+#sliding-menu {
+position: fixed;
+top: 0;
+right: 0;
+width: 250px;
+height: 100%;
+background-color: rgba(255, 255, 255, 1);
+overflow-x: hidden;
+transition: 0.5s;
+z-index: 1;
+padding: 20px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: space-between;
+
+}
+
+.menu-closed {
+transform: translateX(100%);
+}
+
+.carrinho-vazio{
+  text-align: center;
+  font-weight: 300;
+  cursor: pointer;
+}
+
+#close-menu {
+  font-size: 3vh;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  text-align: right;
+}
+
+
+
+.Sapo-triste {
+display: flex;
+justify-content: center;
+align-items: center;
+height: 87%; 
+}
