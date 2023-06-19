@@ -238,12 +238,6 @@
     font-family: 'Material Icons', sans-serif;
   }
   
-  .imagem-camiseta {
-    display: flex;
-    align-items: center;
-    margin-top: 4%;
-    justify-content: center;
-  }
   
   #camisetaIMG {
     margin-top: 5%;
@@ -589,4 +583,36 @@
 
 #empty-cart:hover {
     background-color: #45a049;
+}
+
+.imagem-camiseta {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  margin-top: 4%;
+  justify-content: center;
+}
+
+#camiseta1 {
+  transition: all .3s ease-in-out;
+  cursor: zoom-in;
+  object-fit: cover;
+}
+
+#camiseta1:hover {
+  transform: scale(2);
+}
+.zoom-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.zoom-image {
+  width: 100%;
+  height: 100%;
+}
+
+.zoom-container:hover .zoom-image {
+  transform: scale(1.5);
 }

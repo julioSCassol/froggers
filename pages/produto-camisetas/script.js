@@ -145,5 +145,14 @@ function emptyCart() {
     });
 }
 
+document.querySelector('.zoom-container').addEventListener('mousemove', function(e) {
+  var x = (e.pageX - this.offsetLeft)/this.offsetWidth * 100;
+  var y = (e.pageY - this.offsetTop)/this.offsetHeight * 100;
 
+  document.querySelector('.zoom-image').style.transformOrigin = x + '% ' + y + '%';
+});
+
+document.querySelector('.zoom-container').addEventListener('mouseleave', function(e) {
+  document.querySelector('.zoom-image').style.transformOrigin = 'center center';
+});
 

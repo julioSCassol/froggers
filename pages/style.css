@@ -60,3 +60,9 @@
     gap: 20px;
   }
     
+  .cart-total{
+    display: flex;
+    align-items: center;
+    color: var(--verde-froggers);
+    font-weight: bold;
+  }

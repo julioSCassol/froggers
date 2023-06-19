@@ -1,6 +1,6 @@
 <?php
-
 session_start();
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   echo "Dados de pagamento recebidos:<br>";
   echo "Nome no Cartão: " . $_POST['nome_cartao'] . "<br>";
@@ -58,13 +58,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                     <div id="sliding-menu" class="menu-closed">
                         <div id="header-menu">
-                            <span class="carrinho-vazio">Seu carrinho está vazio!</span>
                             <i id="close-menu" class="material-icons">clear</i>
                         </div>
-                        <div class="Sapo-triste">
-                            <img src="/assets/images/Sapo-triste.png" alt="Sapo-triste">
+
+                        <div class="cart-catalog">
                         </div>
-                        <span id="continue-shopping" class="carrinho-vazio"><u>Continuar Comprando</u></span>
+                        <div id="menu-footer">
+                            <span id="continue-shopping" class="carrinho-vazio"><u>Continuar Comprando</u></span>
+
+                            <button id="empty-cart" onclick="emptyCart()">Esvaziar Carrinho</button>
+                        </div>
                     </div>
                 </div>
                     <link rel="stylesheet" type="text/css" href="style.css">

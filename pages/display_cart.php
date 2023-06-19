@@ -36,11 +36,16 @@ $stmt->bind_param(str_repeat('i', count($ids) + 2), $IDcliente, $_SESSION['IDped
 $stmt->execute();
 $result = $stmt->get_result();
 
+$totalCarrinho = 0;
+
 while ($row = $result->fetch_assoc()) {
     $id = $row['id'];
     $IDcategoria = $row['IDcategoria'];
     $quantidade = $_SESSION['cart'][$id]['quantidade'];
-    
+    $precoUnitario = $row['precoUn'];
+    $precoTotal = $quantidade * $precoUnitario;
+    $totalCarrinho += $precoTotal;
+
     $produtoCategoria = "";
     switch($IDcategoria) {
         case 1:
@@ -60,15 +65,18 @@ while ($row = $result->fetch_assoc()) {
     $imagemCaminho = "/assets/".$produtoCategoria.'/'. $row['nome'] .'.png';
     echo '<img src="'.$imagemCaminho.'" alt="'. $row['nome'] .'" class="catalog-item-img">';
     echo '<p class = catalog-title>' . $row['nome'] . '</p>';
-    echo '<p class = catalog-price>Preço: ' . number_format($row['preco'], 2) . '</p>';
+    echo '<p class = catalog-price>Preço Unitário: R$' . number_format($precoUnitario, 2) . '</p>';
+    echo '<p class = catalog-price>Total: R$' . number_format($precoTotal, 2) . '</p>'; // Exibe o preço total
     echo '<div class="quantity-box">';
     echo '<button class="remove-item" data-productid="' . $id . '" onclick="removeItemFromCart(this.getAttribute(\'data-productid\'))">-</button>';
     echo '<span class="quantity">' . $quantidade . '</span>';
     echo '<button class="add-item" data-productid="' . $id . '" onclick="addToCart(this.getAttribute(\'data-productid\'))">+</button>';
+    
     echo '</div>';
     echo '</div>';
+    
 }
-
+echo '<p class="cart-total">Total do Carrinho: R$' . number_format($totalCarrinho, 2) . '</p>';
 ?>
 </body>
 </html>

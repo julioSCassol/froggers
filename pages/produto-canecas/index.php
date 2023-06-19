@@ -96,33 +96,21 @@ $produto = getprodutoByID($id);
             </div>
             
         <div class="imagem-camiseta">
-            <div id="camisetaIMG">
-                <img id="camiseta1" src="/assets/canecas/<?=$produto['nome']?>.png" alt="camiseta">
-            </div>
+        <div id="camisetaIMG" class="zoom-container">
+            <img id="camiseta1" class="zoom-image" src="/assets/canecas/<?=$produto['nome']?>.png" alt="camiseta">
+        </div>
+
+        
+            
         
             <div class="descricao-preco">
-                <div id="preco-container">
-
+                <div class="nome-produto-descricao-pinto" id="preco-container">
                     <p class="descricao-imagem" id="nome-produto">Caneca <?= $produto['nome'] ?></p>
                 </div>
                 <div id="preco-container">
                     <p class="descricao-imagem" id="preco-produto">R$<?= number_format($produto['preco'], 2, '.', '') ?></p>
                 </div>
-                <p class="descricao-imagem" id="tamanhos-produto">TAMANHOS</p>
-                <div class="quadrados-tamanho">
-                    <button class="quadrado" id="quadrado-p">
-                        <span class="letra">P</span>
-                    </button>
-                    <button class="quadrado" id="quadrado-m">
-                        <span class="letra">M</span>
-                    </button>
-                    <button class="quadrado" id="quadrado-g">
-                        <span class="letra">G</span>
-                    </button>
-                    <button class="quadrado" id="quadrado-gg">
-                        <span class="letra">GG</span>
-                    </button>
-                </div>
+                
                 <button class="descricao-imagem" id="botao-grande" data-productid="<?= $produto['id'] ?>" onclick="addToCart(this.getAttribute('data-productid'))">Adicionar ao carrinho</button>
             </div>
         </div>

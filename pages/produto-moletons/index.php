@@ -92,10 +92,10 @@ $produto = getprodutoByID($id);
                 </div>
             </div>
             
-        <div class="imagem-camiseta">
-            <div id="camisetaIMG">
-                <img id="camiseta1" src="/assets/moletons/<?=$produto['nome']?>.png" alt="camiseta">
-            </div>
+            <div class="imagem-camiseta">
+        <div id="camisetaIMG" class="zoom-container">
+            <img id="camiseta1" class="zoom-image" src="/assets/moletons/<?=$produto['nome']?>.png" alt="camiseta">
+        </div>
         
             <div class="descricao-preco">
                 <div id="preco-container">
