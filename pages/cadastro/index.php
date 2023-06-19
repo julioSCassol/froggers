@@ -73,7 +73,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
 
                     <div class="cart-catalog">
-                        <?php include "../display_cart.php"; ?>
                     </div>
                     <div id="menu-footer">
                         <span id="continue-shopping" class="carrinho-vazio"><u>Continuar Comprando</u></span>
