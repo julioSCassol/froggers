@@ -124,7 +124,7 @@ $produto = getprodutoByID($id);
                 </div>
                 <button class="descricao-imagem" id="botao-grande" data-productid="<?= $produto['id'] ?>" onclick="addToCart(this.getAttribute('data-productid'))">Adicionar ao carrinho</button>
                 <p class="descricao-imagem" id="quantidade-produto">Quantidade Disponível: <?= $produto['quantidade'] ?></p>
-
+            
             </div>
         </div>
         <div class="catalog-container">
