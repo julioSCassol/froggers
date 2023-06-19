@@ -4,12 +4,13 @@ include '../db.php';
 function getprodutoByID($id)
 {
     global $conn;
-    $stmt = $conn->prepare("SELECT * FROM produtos WHERE id = ? AND IDcategoria = 2");
+    $stmt = $conn->prepare("SELECT *, quantidade FROM produtos WHERE id = ? AND IDcategoria = 2");
     $stmt->bind_param('i', $id);
     $stmt->execute();
     $result = $stmt->get_result();
     return $result->fetch_assoc();
 }
+
 
 $id = $_GET['id'];
 $produto = getprodutoByID($id);
@@ -122,6 +123,8 @@ $produto = getprodutoByID($id);
                     </button>
                 </div>
                 <button class="descricao-imagem" id="botao-grande" data-productid="<?= $produto['id'] ?>" onclick="addToCart(this.getAttribute('data-productid'))">Adicionar ao carrinho</button>
+                <p class="descricao-imagem" id="quantidade-produto">Quantidade Disponível: <?= $produto['quantidade'] ?></p>
+
             </div>
         </div>
         <div class="catalog-container">

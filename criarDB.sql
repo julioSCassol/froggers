@@ -23,14 +23,16 @@ CREATE TABLE categorias(
     PRIMARY KEY(id)
 );
 
-CREATE TABLE produtos(
+CREATE TABLE produtos (
     id INT NOT NULL AUTO_INCREMENT,
     nome VARCHAR(45),
     preco FLOAT,
     IDcategoria INT,
-    PRIMARY KEY(id),
-    FOREIGN KEY(IDcategoria) REFERENCES categorias(id)
+    quantidade INT DEFAULT 50,
+    PRIMARY KEY (id),
+    FOREIGN KEY (IDcategoria) REFERENCES categorias (id)
 );
+
 
 CREATE TABLE itens_pedido(
     id INT NOT NULL AUTO_INCREMENT,

@@ -5,12 +5,13 @@ include '../db.php';
 function getprodutoByID($id)
 {
     global $conn;
-    $stmt = $conn->prepare("SELECT * FROM produtos WHERE id = ? AND IDcategoria = 1");
+    $stmt = $conn->prepare("SELECT *, quantidade FROM produtos WHERE id = ? AND IDcategoria = 1");
     $stmt->bind_param('i', $id);
     $stmt->execute();
     $result = $stmt->get_result();
     return $result->fetch_assoc();
 }
+
 
 $id = $_GET['id'];
 $produto = getprodutoByID($id);
@@ -100,7 +101,8 @@ $produto = getprodutoByID($id);
             <div class="descricao-preco">
                 <div id="preco-container">
 
-                    <p class="descricao-imagem" id="nome-produto">Moletom <?= $produto['nome'] ?></p>
+                <p class="descricao-imagem" id="nome-produto">Moletom <?= $produto['nome'] ?></p>
+                
                 </div>
                 <div id="preco-container">
                     <p class="descricao-imagem" id="preco-produto">R$<?= number_format($produto['preco'], 2, '.', '') ?></p>
@@ -121,7 +123,9 @@ $produto = getprodutoByID($id);
                     </button>
                 </div>
                 <button class="descricao-imagem" id="botao-grande" data-productid="<?= $produto['id'] ?>" onclick="addToCart(this.getAttribute('data-productid'))">Adicionar ao carrinho</button>
-            </div>
+                            <p class="descricao-imagem" id="quantidade-produto">Quantidade Disponível: <?= $produto['quantidade'] ?></p>
+
+        </div>
         </div>
         <div class="catalog-container">
             <h1 class= "produtos-relacionadostxt">Produtos Relacionados</h1>
