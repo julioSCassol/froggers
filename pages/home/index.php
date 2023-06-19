@@ -29,8 +29,10 @@ session_start();
                     
 
                     <div class="search-container">
-                        <input type="text" placeholder="Search...">
-                        <button type="submit"> <span class="material-symbols-outlined">arrow_forward_ios</span></button>
+                        <form id="search-form" action="/pages/pesquisa/" method="GET">
+                            <input id="search-input" type="text" name="search" placeholder="Search...">
+                            <button type="submit"> <span class="material-symbols-outlined">arrow_forward_ios</span></button>
+                        </form>
                     </div>
                     
                     <div class="icones">

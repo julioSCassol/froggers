@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             const catalogItem = document.createElement('div');
             catalogItem.className = 'catalog-item';
             catalogItem.innerHTML = `
-              <a href="/pages/produto-camisetas/index.php?id=${produto.id}">
+              <a href="/pages/produto-${imageDir}/index.php?id=${produto.id}">
                 <img src="/assets/${imageDir}/${produto.nome}.png" alt="${produto.nome}" class="catalog-item-img">
               </a>
               <div class="title-wrapper">
