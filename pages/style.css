@@ -66,3 +66,9 @@
     color: var(--verde-froggers);
     font-weight: bold;
   }
+
+  .cart-item{
+    width: 350px;
+  }
+
+  
