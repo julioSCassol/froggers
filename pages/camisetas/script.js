@@ -72,13 +72,15 @@ function displayCart() {
   $.get("../display_cart.php")
     .done(function(data) {
       if (data) {
-        console.log(data);
         $(".cart-catalog").html(data);
+        $('#confirm-payment').show();
       } else {
         $(".cart-catalog").html("O carrinho está vazio.");
+        $('#confirm-payment').hide();
       }
-    });
+  });
 }
+
 function addToCart(id) {
 
   $.post("../add_to_cart.php", { id: id })
@@ -99,3 +101,19 @@ function removeItemFromCart(id) {
 $(document).ready(function() {
   displayCart();
 });
+
+$(document).ready(function() {
+  displayCart();
+
+  $('#confirm-payment').click(function() {
+    window.location.href = "/pages/pagamento/index.php";
+  });
+});
+
+function emptyCart() {
+  $.post("../empty_cart.php")
+    .done(function(data) {
+      console.log("Carrinho esvaziado");
+      displayCart();
+    });
+}

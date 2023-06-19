@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
           catalogItem.className = 'catalog-item';
           catalogItem.innerHTML = `
-              <a href="/pages/produto-camisetas/index.php?id=${produto.id}">
+              <a href="/pages/produto-canecas/index.php?id=${produto.id}">
                 <img src="/assets/canecas/${produto.nome}.png" alt="${produto.nome}" class="catalog-item-img">
               </a>
               <div class="title-wrapper">
@@ -66,12 +66,13 @@ function displayCart() {
   $.get("../display_cart.php")
     .done(function(data) {
       if (data) {
-        console.log(data);
         $(".cart-catalog").html(data);
+        $('#confirm-payment').show();
       } else {
         $(".cart-catalog").html("O carrinho está vazio.");
+        $('#confirm-payment').hide();
       }
-    });
+  });
 }
 
 function addToCart(id) {
@@ -94,3 +95,19 @@ function removeItemFromCart(id) {
 $(document).ready(function() {
   displayCart();
 });
+
+$(document).ready(function() {
+  displayCart();
+
+  $('#confirm-payment').click(function() {
+    window.location.href = "/pages/pagamento/index.php";
+  });
+});
+
+function emptyCart() {
+  $.post("../empty_cart.php")
+    .done(function(data) {
+      console.log("Carrinho esvaziado");
+      displayCart();
+    });
+}

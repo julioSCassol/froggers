@@ -57,15 +57,31 @@ function removeItemFromCart(id) {
 $(document).ready(function() {
   displayCart();
 });
-
 function displayCart() {
   $.get("../display_cart.php")
     .done(function(data) {
       if (data) {
-        console.log(data);
         $(".cart-catalog").html(data);
+        $('#confirm-payment').show();
       } else {
         $(".cart-catalog").html("O carrinho está vazio.");
+        $('#confirm-payment').hide();
       }
+  });
+}
+
+$(document).ready(function() {
+  displayCart();
+
+  $('#confirm-payment').click(function() {
+    window.location.href = "/pages/pagamento/index.php";
+  });
+});
+
+function emptyCart() {
+  $.post("../empty_cart.php")
+    .done(function(data) {
+      console.log("Carrinho esvaziado");
+      displayCart();
     });
 }

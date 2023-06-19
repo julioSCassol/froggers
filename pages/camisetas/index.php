@@ -54,6 +54,8 @@ include '../db.php';
                         </div>
                         <div id="menu-footer">
                             <span id="continue-shopping" class="carrinho-vazio"><u>Continuar Comprando</u></span>
+                            <button id="confirm-payment" style="display: none;">Confirmar Pagamento</button>
+                            <button id="empty-cart" onclick="emptyCart()">Esvaziar Carrinho</button>
                         </div>
                     </div>
                     

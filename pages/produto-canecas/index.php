@@ -1,5 +1,22 @@
 <?php
 session_start();
+include '../db.php';
+
+
+
+function getprodutoByID($id)
+{
+    global $conn;
+    $stmt = $conn->prepare("SELECT * FROM produtos WHERE id = ? AND IDcategoria = 3");
+    $stmt->bind_param('i', $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_assoc();
+}
+
+$id = $_GET['id'];
+$produto = getprodutoByID($id);
+
 ?>
 
 <!DOCTYPE html>
@@ -15,9 +32,11 @@ session_start();
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet"> 
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet"> 
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">       
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
     <body>
-
         <div class="pagina">
             <div id="header">
                 <div id="topper">
@@ -29,8 +48,10 @@ session_start();
                     
 
                     <div class="search-container">
-                        <input type="text" placeholder="Search...">
-                        <button type="submit"> <span class="material-symbols-outlined">arrow_forward_ios</span></button>
+                        <form id="search-form" action="/pages/pesquisa/" method="GET">
+                            <input id="search-input" type="text" name="search" placeholder="Search...">
+                            <button type="submit"> <span class="material-symbols-outlined">arrow_forward_ios</span></button>
+                        </form>
                     </div>
                     
                     <div class="icones">
@@ -54,7 +75,7 @@ session_start();
                         </div>
                         <div id="menu-footer">
                             <span id="continue-shopping" class="carrinho-vazio"><u>Continuar Comprando</u></span>
-                            <button id="confirm-payment" style="display: none;">Confirmar Pagamento</button>
+                            <button id="confirm-payment" >Confirmar Pagamento</button>
                             <button id="empty-cart" onclick="emptyCart()">Esvaziar Carrinho</button>
                         </div>
                     </div>
@@ -73,27 +94,47 @@ session_start();
                     </a>
                 </div>
             </div>
-        </div>
+            
+        <div class="imagem-camiseta">
+            <div id="camisetaIMG">
+                <img id="camiseta1" src="/assets/canecas/<?=$produto['nome']?>.png" alt="camiseta">
+            </div>
         
-        <div id="carousel">
-    <div class="carousel-item">
-        <img src="\assets\banners\banner inicial 1920.png" alt="Imagem 1">
-    </div>
-    <div class="carousel-item">
-        <img src="\assets\banners\banner 1.png" alt="Imagem 2">
-    </div>
-</div>
+            <div class="descricao-preco">
+                <div id="preco-container">
 
-<div class="destaques">
-  <p class="destaques-texto">DESTAQUES</p>
-  <div class="destaque-imagem">
-    <img src="\assets\banners\banner pqn inicial.png" alt="banner-destaque">
-  </div>
-  <div class="outras-imagens">
-    <img src="\assets\camisetas\Lei.png" alt="Imagem 1">
-    <img src="\assets\camisetas\Lua.png" alt="Imagem 2">
-    <img src="\assets\camisetas\Shinjo.png" alt="Imagem 3">
-  </div>
+                    <p class="descricao-imagem" id="nome-produto">Caneca <?= $produto['nome'] ?></p>
+                </div>
+                <div id="preco-container">
+                    <p class="descricao-imagem" id="preco-produto">R$<?= number_format($produto['preco'], 2, '.', '') ?></p>
+                </div>
+                <p class="descricao-imagem" id="tamanhos-produto">TAMANHOS</p>
+                <div class="quadrados-tamanho">
+                    <button class="quadrado" id="quadrado-p">
+                        <span class="letra">P</span>
+                    </button>
+                    <button class="quadrado" id="quadrado-m">
+                        <span class="letra">M</span>
+                    </button>
+                    <button class="quadrado" id="quadrado-g">
+                        <span class="letra">G</span>
+                    </button>
+                    <button class="quadrado" id="quadrado-gg">
+                        <span class="letra">GG</span>
+                    </button>
+                </div>
+                <button class="descricao-imagem" id="botao-grande" data-productid="<?= $produto['id'] ?>" onclick="addToCart(this.getAttribute('data-productid'))">Adicionar ao carrinho</button>
+            </div>
+        </div>
+        <div class="catalog-container">
+            <h1 class= "produtos-relacionadostxt">Produtos Relacionados</h1>
+            <div class="swiper-container">
+              <div class="swiper-wrapper">
+              </div>
+              <div class="swiper-button-next"></div>
+              <div class="swiper-button-prev"></div>
+            </div>
+        </div>
 </div>
 
         <footer>
@@ -125,9 +166,9 @@ session_start();
                     </div>
                 </div>
             </div>
+
         </footer> 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="script.js"></script>
-    </body>   
-    
+    </body>
 </html>

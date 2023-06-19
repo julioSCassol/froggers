@@ -1,11 +1,18 @@
 <?php
+
 session_start();
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  echo "Dados de pagamento recebidos:<br>";
+  echo "Nome no Cartão: " . $_POST['nome_cartao'] . "<br>";
+  echo "Número do Cartão: " . $_POST['numero_cartao'] . "<br>";
+  echo "Data de Validade: " . $_POST['data_validade'] . "<br>";
+  echo "Código de Segurança: " . $_POST['codigo_seguranca'] . "<br>";
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="UTF-8">
         <title>Froggers</title>
         <link rel="icon" type="image/png" href="/assets/images/logo.png">
@@ -15,19 +22,23 @@ session_start();
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet"> 
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet"> 
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+ 
     </head>
     <body>
+   
         <div class="pagina">
-            <div id=    "header">
+            <div id="header">
                 <div id="topper">
                     <a href="/pages/home/index.php">
                         <div class="logo-container">
                             <img class="logo-completa" src="/assets/images/logo-completa.png" alt="logo-completa">
                         </div>
                     </a>
-                    
-
                     <div class="search-container">
                         <form id="search-form" action="/pages/pesquisa/" method="GET">
                             <input id="search-input" type="text" name="search" placeholder="Search...">
@@ -41,61 +52,52 @@ session_start();
                                 <span class="material-icons">person</span>
                             </a>
                             </div>
-                        
-                        
+                    
                         <span id="menu-button" class="material-icons">shopping_bag</span>
-
                         
                     </div>
                     <div id="sliding-menu" class="menu-closed">
                         <div id="header-menu">
+                            <span class="carrinho-vazio">Seu carrinho está vazio!</span>
                             <i id="close-menu" class="material-icons">clear</i>
                         </div>
-
-                        <div class="cart-catalog">
+                        <div class="Sapo-triste">
+                            <img src="/assets/images/Sapo-triste.png" alt="Sapo-triste">
                         </div>
-                        <div id="menu-footer">
-                            <span id="continue-shopping" class="carrinho-vazio"><u>Continuar Comprando</u></span>
-                            <button id="confirm-payment" style="display: none;">Confirmar Pagamento</button>
-                            <button id="empty-cart" onclick="emptyCart()">Esvaziar Carrinho</button>
-                        </div>
+                        <span id="continue-shopping" class="carrinho-vazio"><u>Continuar Comprando</u></span>
                     </div>
                 </div>
+                    <link rel="stylesheet" type="text/css" href="style.css">
+                    </head>
 
-                <div id="coisas-que-vende">
-                    <a href="/pages/camisetas/index.php">
-                        <div class="categorias">camisetas</div>
-                    </a>
-                    <a href="/pages/moletons/index.php">
-                        <div class="categorias">moletons</div>
-                    </a>
-                    <a href="/pages/canecas/index.php">
-                        <div class="categorias">canecas</div>
-                    </a>
-                </div>
-            </div>
-            
-            <div id="banner-canecas">
-                <img src="/assets/banners/BANNER CANECAS.png" alt="banner-canecas">
-            </div>
-
-            <div class="catalog-container">
-                <div class="sort-container">
-                    <label for="sort">Filtrar por:</label>
-                    <select id="sort" name="sort">
-                      <option value="default">Padrão</option>
-                      <option value="name-asc">Nome: A à Z</option>
-                      <option value="name-desc">Name: Z à A</option>
-                    </select>
-                  </div>
+                    <div class="form-container">
                 
-                <div class="catalog" id="catalog">
-                </div>
+                <form class="login-form" action="/pages/home/index.php" method="post">
+                    <input type="text" placeholder="Nome impresso no cartão" required>
+                    <input type="text" placeholder="Numero do cartão" required>
+                    <div class="caixa-senha">
+                        <input id="data_validade" type="text" placeholder="MM/AAAA" name="data-validade" required>
+                        <input type="text" placeholder="CVV" required>                       
+                    </div>
+                    <div class="checkbox-div">
+                    <label class="custom-checkbox"> 
+                    <input type="checkbox" id="show-captcha" name="show-captcha">
+                        <span id="CAPTCHA">Aceitos os<span  href=""> termos de uso</span></span> 
+                        <span class="checkmark"></span>
+                    </label>
+                    </div>
+                        <div id="captcha-container" style="display: none;">
+                            <input type="hidden" name="captcha_result" id="captcha_result">
+                        <div id="captcha"></div>
+                            <input type="text" name="captcha" placeholder="Digite o resultado">
+                        </div>
+                        <button type="submit">Registrar</button>
+                    
+                </form>
             </div>
-
-        </div>
-
-        <footer>
+                  
+        <div id="footer">
+            <footer>
             <div class="Atendimento">
                 Atendimento:
                 <div class="Itens">
@@ -124,10 +126,24 @@ session_start();
                     </div>
                 </div>
             </div>
-        </footer> 
-        <div id="overlay" class="overlay-hidden"></div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        </footer>
+        </div> 
         <script src="script.js"></script>
+        <script>
+  $(document).ready(function() {
+    $("#data_validade").datepicker({
+      dateFormat: "mm/yy", 
+      changeMonth: true, 
+      changeYear: true, 
+      showButtonPanel: true, 
+      onClose: function(dateText, inst) {
+        $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
+      }
+    });
+  });
+</script>
+
+
     </body>   
     
 </html>

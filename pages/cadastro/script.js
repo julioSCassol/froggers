@@ -1,76 +1,61 @@
-function toggleMenu() {
-  const slidingMenu = document.getElementById('sliding-menu');
+function togglePasswordVisibility() {
+  const passwordField = document.querySelector('input[name="password"]');
+  const confirmPasswordField = document.querySelector('input[name="confirm_password"]');
+  const passwordToggle = document.querySelector('.password-toggle');
 
-  if (slidingMenu.classList.contains('menu-closed')) {
-    slidingMenu.classList.remove('menu-closed');
+  if (passwordField.type === 'password') {
+    passwordField.type = 'text';
+    confirmPasswordField.type = 'text';
+    passwordToggle.textContent = 'visibility';
   } else {
-    slidingMenu.classList.add('menu-closed');
+    passwordField.type = 'password';
+    confirmPasswordField.type = 'password';
+    passwordToggle.textContent = 'visibility_off';
   }
 }
-window.onload = function() {
-  document.getElementById('show-captcha').addEventListener('change', function() {
-      if (this.checked) {
-          var num1 = Math.floor(Math.random() * 10) + 1;
-          var num2 = Math.floor(Math.random() * 10) + 1;
 
-          document.getElementById('captcha').textContent = num1 + " + " + num2 + " = ?";
-          document.getElementById('captcha_result').value = num1 + num2;
-
-          document.getElementById('captcha-container').style.display = 'block';
-      } else {
-          document.getElementById('captcha-container').style.display = 'none';
-      }
-  });
-}
-document.querySelector('.login-form').addEventListener('submit', function(event) {
+function handleFormSubmit(event) {
   const nome = document.querySelector('input[name="name"]');
   const email = document.querySelector('input[name="email"]');
   const senha = document.querySelector('input[name="password"]');
-  const senha_confirmada = document.querySelector('input[name="confirm_password"]');
+  const senhaConfirmada = document.querySelector('input[name="confirm_password"]');
 
-  if (!nome.value || !email.value || !senha.value || !senha_confirmada.value) {
-      event.preventDefault();
-      alert("Por favor preencha todos os campos");
+  if (!nome.value || !email.value || !senha.value || !senhaConfirmada.value) {
+    event.preventDefault();
+    alert("Por favor preencha todos os campos");
   }
-});
-
-
-
-document.getElementById('menu-button').addEventListener('click', toggleMenu);
-document.getElementById('continue-shopping').addEventListener('click', toggleMenu);
-document.getElementById('close-menu').addEventListener('click', toggleMenu);
-
-const pagina = document.querySelector('.pagina');
-pagina.style.minHeight = window.innerHeight + 'px';
-
-function displayCart() {
-  $.get("../display_cart.php")
-    .done(function(data) {
-      if (data) {
-        console.log(data);
-        $(".cart-catalog").html(data);
-      } else {
-        $(".cart-catalog").html("O carrinho está vazio.");
-      }
-    });
-}
-function addToCart(id) {
-
-  $.post("../add_to_cart.php", { id: id })
-    .done(function(data) {
-      console.log("Item added to cart");
-      displayCart();
-    });
 }
 
-function removeItemFromCart(id) {
-  $.post("../remove_from_cart.php", { id: id })
-      .done(function(data) {
-          console.log("Item removed from cart");
-          displayCart();
-      });
+function generateCaptcha() {
+  const num1 = Math.floor(Math.random() * 10) + 1;
+  const num2 = Math.floor(Math.random() * 10) + 1;
+
+  const captchaContainer = document.getElementById('captcha');
+  const captchaResultField = document.getElementById('captcha_result');
+
+  captchaContainer.textContent = num1 + " + " + num2 + " = ?";
+  captchaResultField.value = num1 + num2;
 }
 
-$(document).ready(function() {
-  displayCart();
-});
+function toggleCaptcha() {
+  const captchaContainer = document.getElementById('captcha-container');
+  const captchaCheckbox = document.getElementById('show-captcha');
+
+  if (captchaCheckbox.checked) {
+    generateCaptcha();
+    captchaContainer.style.display = 'block';
+  } else {
+    captchaContainer.style.display = 'none';
+  }
+}
+
+window.onload = function() {
+  const passwordToggle = document.querySelector('.password-toggle');
+  passwordToggle.addEventListener('click', togglePasswordVisibility);
+
+  const loginForm = document.querySelector('.login-form');
+  loginForm.addEventListener('submit', handleFormSubmit);
+
+  const captchaCheckbox = document.getElementById('show-captcha');
+  captchaCheckbox.addEventListener('change', toggleCaptcha);
+};

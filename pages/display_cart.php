@@ -38,9 +38,27 @@ $result = $stmt->get_result();
 
 while ($row = $result->fetch_assoc()) {
     $id = $row['id'];
+    $IDcategoria = $row['IDcategoria'];
     $quantidade = $_SESSION['cart'][$id]['quantidade'];
+    
+    $produtoCategoria = "";
+    switch($IDcategoria) {
+        case 1:
+            $produtoCategoria = "moletons";
+            break;
+        case 2:
+            $produtoCategoria = "camisetas";
+            break;
+        case 3:
+            $produtoCategoria = "canecas";
+            break;
+        default:
+            $produtoCategoria = "outras";
+    }
+    
     echo '<div class="cart-item">';
-    echo '<img src="/assets/camisetas/'. $row['nome'] .'.png" alt="'. $row['nome'] .'" class="catalog-item-img">';
+    $imagemCaminho = "/assets/".$produtoCategoria.'/'. $row['nome'] .'.png';
+    echo '<img src="'.$imagemCaminho.'" alt="'. $row['nome'] .'" class="catalog-item-img">';
     echo '<p class = catalog-title>' . $row['nome'] . '</p>';
     echo '<p class = catalog-price>Preço: ' . number_format($row['preco'], 2) . '</p>';
     echo '<div class="quantity-box">';
@@ -49,7 +67,6 @@ while ($row = $result->fetch_assoc()) {
     echo '<button class="add-item" data-productid="' . $id . '" onclick="addToCart(this.getAttribute(\'data-productid\'))">+</button>';
     echo '</div>';
     echo '</div>';
-    
 }
 
 ?>

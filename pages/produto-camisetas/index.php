@@ -14,10 +14,7 @@ function getprodutoByID($id)
 $id = $_GET['id'];
 $produto = getprodutoByID($id);
 
-if (empty($produto)) {
-    echo '<script>alert("Produto não encontrado!");history.back();</script>';
-    exit;
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,9 +69,12 @@ if (empty($produto)) {
                         </div>
 
                         <div class="cart-catalog">
+                        
                         </div>
                         <div id="menu-footer">
                             <span id="continue-shopping" class="carrinho-vazio"><u>Continuar Comprando</u></span>
+                            <button id="confirm-payment" style="display: none;">Confirmar Pagamento</button>
+                            <button id="empty-cart" onclick="emptyCart()">Esvaziar Carrinho</button>
                         </div>
                     </div>
                     
@@ -100,7 +100,7 @@ if (empty($produto)) {
         
             <div class="descricao-preco">
                 <div id="preco-container">
-
+    
                     <p class="descricao-imagem" id="nome-produto">Camiseta <?= $produto['nome'] ?></p>
                 </div>
                 <div id="preco-container">

@@ -550,3 +550,41 @@ height: 87%;
 .swiper-container {
   overflow-x: hidden;
 }
+
+#confirm-payment {
+  display: inline-block;
+  margin: 10px;
+  padding: 10px 14px;
+  color: #fff;
+  background-color: var(--verde-froggers);
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+#confirm-payment:hover {
+  background-color: #45a049;
+}
+
+#empty-cart {
+  display: inline-block;
+  margin: 7px;
+  padding: 10px 27px;
+  color: #fff;
+  background-color: var(--verde-froggers);
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+#empty-cart:hover {
+  background-color: #45a049;
+}
