@@ -313,104 +313,27 @@
   flex: 1;
 }
 
-.outras-imagens {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
+.catalog-container {
+  margin-top: 10vh;
+  padding-left: 30vh;
+  padding-right: 30vh;
+  width: 100%;
 }
-.outras-imagens img {
-  width: 100px;
+
+#catalog {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-gap: 20px;
+}
+
+.catalog-item {
+  cursor: pointer;
+  width: 100%;
+}
+
+.catalog-item img {
+  width: 100%;
   height: auto;
-  margin-right: 10px;
-}
-
-
-#menu-footer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-
-#sliding-menu {
-position: fixed;
-top: 0;
-right: 0;
-width: 250px;
-height: 100%;
-background-color: rgba(255, 255, 255, 1);
-overflow-x: hidden;
-transition: 0.5s;
-z-index: 1;
-padding: 20px;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: space-between;
-
-}
-
-.menu-closed {
-transform: translateX(100%);
-}
-
-.carrinho-vazio{
-  text-align: center;
-  font-weight: 300;
-  cursor: pointer;
-}
-
-#close-menu {
-  font-size: 3vh;
-  top: 20px;
-  right: 20px;
-  cursor: pointer;
-  text-align: right;
-}
-
-
-
-.Sapo-triste {
-display: flex;
-justify-content: center;
-align-items: center;
-height: 87%; 
-}
-
-#confirm-payment {
-  display: inline-block;
-  margin: 10px;
-  padding: 10px 14px;
-  color: #fff;
-  background-color: var(--verde-froggers);
-  border: none;
-  border-radius: 5px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 16px;
-  transition-duration: 0.4s;
-  cursor: pointer;
-}
-
-#confirm-payment:hover {
-  background-color: #45a049;
-}
-
-#empty-cart {
-  display: inline-block;
-  margin: 7px;
-  padding: 10px 27px;
-  color: #fff;
-  background-color: var(--verde-froggers);
-  border: none;
-  border-radius: 5px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 16px;
-  transition-duration: 0.4s;
-  cursor: pointer;
-}
-
-#empty-cart:hover {
-  background-color: #45a049;
+  display: block;
+  transition: opacity 0.1s ease;
 }

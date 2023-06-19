@@ -47,16 +47,14 @@ session_start();
                     </div>
                     <div id="sliding-menu" class="menu-closed">
                         <div id="header-menu">
+                            <span class="carrinho-vazio">Seu carrinho está vazio!</span>
                             <i id="close-menu" class="material-icons">clear</i>
                         </div>
-
-                        <div class="cart-catalog">
-                        </div>
-                        <div id="menu-footer">
-                            <span id="continue-shopping" class="carrinho-vazio"><u>Continuar Comprando</u></span>
-                            <button id="confirm-payment" style="display: none;">Confirmar Pagamento</button>
-                            <button id="empty-cart" onclick="emptyCart()">Esvaziar Carrinho</button>
-                        </div>
+                        <div class="Sapo-triste">
+                            <img src="/assets/images/Sapo-triste.png" alt="Sapo-triste">
+                            </div>
+                        <span><?php echo $_SESSION['username']; ?></span>
+                        <span id="continue-shopping" class="carrinho-vazio"><u>Continuar Comprando</u></span>
                     </div>
                     
                 </div>
@@ -89,13 +87,13 @@ session_start();
   <div class="destaque-imagem">
     <img src="\assets\banners\banner pqn inicial.png" alt="banner-destaque">
   </div>
-  <div class="outras-imagens">
-    <img src="\assets\camisetas\Lei.png" alt="Imagem 1">
-    <img src="\assets\camisetas\Lua.png" alt="Imagem 2">
-    <img src="\assets\camisetas\Shinjo.png" alt="Imagem 3">
-  </div>
-</div>
+</div> 
 
+        <div class="catalog-container">
+                <div class="catalog" id="catalog">
+                    
+                </div>
+            </div>
         <footer>
             <div class="Atendimento">
                 Atendimento:
@@ -126,7 +124,6 @@ session_start();
                 </div>
             </div>
         </footer> 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="script.js"></script>
     </body>   
     
