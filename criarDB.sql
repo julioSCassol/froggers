@@ -37,6 +37,7 @@ CREATE TABLE produtos (
 CREATE TABLE itens_pedido(
     id INT NOT NULL AUTO_INCREMENT,
     quantidade INT,
+    tamanho CHAR(2),
     precoUn FLOAT,
     IDprodutos INT,
     IDpedidos INT,
