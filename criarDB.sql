@@ -37,12 +37,12 @@ CREATE TABLE produtos (
 CREATE TABLE itens_pedido(
     id INT NOT NULL AUTO_INCREMENT,
     quantidade INT,
-    tamanho CHAR(2),
+    tamanho VARCHAR(2),
     precoUn FLOAT,
     IDprodutos INT,
     IDpedidos INT,
     PRIMARY KEY(id),
-    UNIQUE KEY item_pedido_unique (IDprodutos, IDpedidos),
+    UNIQUE KEY item_pedido_unique (IDprodutos, tamanho),
     FOREIGN KEY(IDprodutos) REFERENCES produtos(id),
     FOREIGN KEY(IDpedidos) REFERENCES pedidos(id)
 );

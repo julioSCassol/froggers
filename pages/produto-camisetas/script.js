@@ -156,3 +156,27 @@ document.querySelector('.zoom-container').addEventListener('mouseleave', functio
   document.querySelector('.zoom-image').style.transformOrigin = 'center center';
 });
 
+function getSelectedSize() {
+  let sizeElement = document.querySelector('.quadrado.clicked .letra');
+  if (sizeElement) {
+      return sizeElement.textContent;
+  } else {
+      return null;
+  }
+}
+
+function addToCart(id) {
+  let size = getSelectedSize();
+  console.log(size);
+
+  if (!size) {
+      alert("Por favor selecione o tamanho desejado!");
+      return;
+  }
+
+  $.post("../add_to_cart.php", { id: id, size: size })
+      .done(function(data) {
+        console.log("Item adicionado ao carrinho");
+        displayCart();
+      });
+}

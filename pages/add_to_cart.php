@@ -5,8 +5,11 @@ include 'pedido.php';
 include 'db.php';
 
 $id = isset($_POST['id']) ? $_POST['id'] : "";
+$size = isset($_POST['size']) ? $_POST['size'] : "";
+echo ($size);
 $IDcliente = isset($_SESSION['IDcliente']) ? $_SESSION['IDcliente'] : "";
 $IDpedido = isset($_SESSION['IDpedido']) ? $_SESSION['IDpedido'] : "";
+
 function getprodutoByID($id)
 {
     global $conn;
@@ -19,31 +22,37 @@ function getprodutoByID($id)
 
 $produto = getprodutoByID($id);
 
-echo "<script>alert('Item inserted successfully. IDcliente: " . $IDcliente . "');</script>";
-
-$quantidade = 1;
 $precoUn = $produto['preco'];
 
+$stmt = $conn->prepare("SELECT * FROM itens_pedido WHERE IDprodutos = ? AND IDpedidos = ? AND tamanho = ?");
+$stmt->bind_param('iis', $id, $IDpedido, $size);
+$stmt->execute();
+$result = $stmt->get_result();
+$itensPedido = $result->fetch_assoc();
 
-if(!isset($_SESSION['cart'])){
-    $_SESSION['cart'] = array();
-}
-
-$stmt = $conn->prepare("INSERT INTO itens_pedido (quantidade, precoUn, IDprodutos, IDpedidos) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE quantidade = ?");
-$stmt->bind_param('idiii', $quantidade, $precoUn, $id, $IDpedido, $quantidade);
-$result = $stmt->execute();
-
-if (isset($_SESSION['cart'][$id])) {
-    $_SESSION['cart'][$id]['quantidade'] += $quantidade;
-} else {
+if ($itensPedido) {
+    $quantidade = $itensPedido['quantidade'] + 1;
     $_SESSION['cart'][$id] = array(
         "quantidade" => $quantidade,
         "precoUn" => $precoUn,
         "id" => $id,
-        "IDpedido" => $IDpedido
+        "IDpedido" => $IDpedido,
+        "tamanho" => $size
     );
+} else {
+    $quantidade = 1;
+    $_SESSION['cart'][$id] = array(
+        "quantidade" => $quantidade,
+        "precoUn" => $precoUn,
+        "id" => $id,
+        "IDpedido" => $IDpedido,
+        "tamanho" => $size
+    );
+
+    $stmt = $conn->prepare("INSERT INTO itens_pedido (quantidade, precoUn, IDprodutos, IDpedidos, tamanho) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param('idiis', $quantidade, $precoUn, $id, $IDpedido, $size);
+    $stmt->execute();
 }
-
-
-
+$stmt->close();
+$conn->close();
 ?>

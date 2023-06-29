@@ -26,7 +26,7 @@ if (!isset($_SESSION['cart']) || empty($_SESSION['cart'])) {
 
 $ids = array_keys($_SESSION['cart']);
 
-$stmt = $conn->prepare("SELECT produtos.*, itens_pedido.quantidade, itens_pedido.precoUn
+$stmt = $conn->prepare("SELECT produtos.*, itens_pedido.quantidade, itens_pedido.precoUn, itens_pedido.tamanho
                         FROM produtos
                         INNER JOIN itens_pedido ON produtos.id = itens_pedido.IDprodutos
                         INNER JOIN pedidos ON itens_pedido.IDpedidos = pedidos.id
@@ -41,10 +41,11 @@ $totalCarrinho = 0;
 while ($row = $result->fetch_assoc()) {
     $id = $row['id'];
     $IDcategoria = $row['IDcategoria'];
-    $quantidade = $_SESSION['cart'][$id]['quantidade'];
+    $quantidade = $row['quantidade'];
     $precoUnitario = $row['precoUn'];
     $precoTotal = $quantidade * $precoUnitario;
     $totalCarrinho += $precoTotal;
+    $size = $row['tamanho'];
 
     $produtoCategoria = "";
     switch($IDcategoria) {
@@ -67,10 +68,11 @@ while ($row = $result->fetch_assoc()) {
     echo '<p class = catalog-title>' . $row['nome'] . '</p>';
     echo '<p class = catalog-price>Preço Unitário: R$' . number_format($precoUnitario, 2) . '</p>';
     echo '<p class = catalog-price>Total: R$' . number_format($precoTotal, 2) . '</p>'; // Exibe o preço total
+    echo '<p class = catalog-size>Tamanho: ' . $size . '</p>';
     echo '<div class="quantity-box">';
     echo '<button class="remove-item" data-productid="' . $id . '" onclick="removeItemFromCart(this.getAttribute(\'data-productid\'))">-</button>';
     echo '<span class="quantity">' . $quantidade . '</span>';
-    echo '<button class="add-item" data-productid="' . $id . '" onclick="addToCart(this.getAttribute(\'data-productid\'))">+</button>';
+    echo '<button class="add-item" data-productid="' . $id . '" data-productsize="' . $size . '" onclick="addToCart(this.getAttribute(\'data-productid\'), this.getAttribute(\'data-productsize\'))">+</button>';
     
     echo '</div>';
     echo '</div>';
