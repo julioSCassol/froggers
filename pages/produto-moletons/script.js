@@ -145,18 +145,35 @@ function getSelectedSize() {
   }
 }
 
-function addToCart(id) {
-  let size = getSelectedSize();
-  console.log(size);
+function displayCart() {
+  $.get("../display_cart.php")
+    .done(function(data) {
+      if (data) {
+        $(".cart-catalog").html(data);
+        $('#confirm-payment').show();
+      } else {
+        $(".cart-catalog").html("O carrinho está vazio.");
+        $('#confirm-payment').hide();
+      }
+  });
+}
 
-  if (!size) {
-      alert("Por favor selecione o tamanho desejado!");
-      return;
-  }
+$(document).ready(function() {
+  displayCart();
+});
 
-  $.post("../add_to_cart.php", { id: id, size: size })
-      .done(function(data) {
-        console.log("Item adicionado ao carrinho");
-        displayCart();
-      });
+$(document).ready(function() {
+  displayCart();
+
+  $('#confirm-payment').click(function() {
+    window.location.href = "/pages/pagamento/index.php";
+  });
+});
+
+function emptyCart() {
+  $.post("../empty_cart.php")
+    .done(function(data) {
+      console.log("Carrinho esvaziado");
+      displayCart();
+    });
 }

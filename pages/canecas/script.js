@@ -75,23 +75,6 @@ function displayCart() {
   });
 }
 
-function addToCart(id) {
-
-  $.post("../add_to_cart.php", { id: id })
-    .done(function(data) {
-      console.log("Item added to cart");
-      displayCart();
-    });
-}
-
-function removeItemFromCart(id) {
-  $.post("../remove_from_cart.php", { id: id })
-      .done(function(data) {
-          console.log("Item removed from cart");
-          displayCart();
-      });
-}
-
 $(document).ready(function() {
   displayCart();
 });
