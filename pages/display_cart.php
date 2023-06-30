@@ -16,12 +16,17 @@ $IDcliente = isset($_SESSION['IDcliente']) ? $_SESSION['IDcliente'] : "";
 <body>
 <?php
 
-if (!isset($_SESSION['cart']) || empty($_SESSION['cart'])) {
+// isso aqui é só pro sapo triste aparecer
+$stmt = $conn->prepare("SELECT * FROM itens_pedido WHERE IDpedidos = ?");
+$stmt->bind_param("i", $IDpedido);
+$stmt->execute();
+$resultSapo = $stmt->get_result();
+
+if ($resultSapo->num_rows == 0) {
     echo '<div class="Sapo-triste">
             <img src="/assets/images/Sapo-triste.png" alt="Sapo-triste">
             <p>Carrinho Vazio!</p>
           </div>';
-    exit;
 }
 
 $ids = array_keys($_SESSION['cart']);
@@ -37,7 +42,6 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 $totalCarrinho = 0;
-
 while ($row = $result->fetch_assoc()) {
     $id = $row['id'];
     $IDcategoria = $row['IDcategoria'];
@@ -68,17 +72,42 @@ while ($row = $result->fetch_assoc()) {
     echo '<p class = catalog-title>' . $row['nome'] . '</p>';
     echo '<p class = catalog-price>Preço Unitário: R$' . number_format($precoUnitario, 2) . '</p>';
     echo '<p class = catalog-price>Total: R$' . number_format($precoTotal, 2) . '</p>'; // Exibe o preço total
-    echo '<p class = catalog-size>Tamanho: ' . $size . '</p>';
+    if ($IDcategoria != 3) {
+        echo '<p class="catalog-size">Tamanho: ' . $size . '</p>';
+    }
     echo '<div class="quantity-box">';
-    echo '<button class="remove-item" data-productid="' . $id . '" onclick="removeItemFromCart(this.getAttribute(\'data-productid\'))">-</button>';
+    echo '<button class="remove-item" data-productid="' . $id . '" data-productsize="' . $size . '" onclick="removeItemFromCart(this.getAttribute(\'data-productid\'), this.getAttribute(\'data-productsize\'))">-</button>';
     echo '<span class="quantity">' . $quantidade . '</span>';
-    echo '<button class="add-item" data-productid="' . $id . '" data-productsize="' . $size . '" onclick="addToCart(this.getAttribute(\'data-productid\'), this.getAttribute(\'data-productsize\'))">+</button>';
-    
+    echo '<button class="add-item" data-productid="' . $id . '" data-productsize="' . $size . '" onclick="addToCartIn(this.getAttribute(\'data-productid\'), this.getAttribute(\'data-productsize\'))">+</button>';    
     echo '</div>';
     echo '</div>';
     
 }
-echo '<p class="cart-total">Total do Carrinho: R$' . number_format($totalCarrinho, 2) . '</p>';
+
+if ($resultSapo->num_rows > 0) {
+    echo '<div id="menu-container">';
+    echo '<p class="cart-total">Total do Carrinho: R$' . number_format($totalCarrinho, 2) . '</p>';
+    echo '</div>';
+}
 ?>
 </body>
+<script>
+    function addToCartIn(id, size) {
+        console.log(size);
+
+        $.post("../add_to_cart_in.php", { id: id, size: size })
+            .done(function(data) {
+                console.log("Item adicionado ao carrinho");
+                displayCart();
+            });
+    }
+    function removeItemFromCart(id, size) {
+        console.log(size);
+        $.post("../remove_from_cart.php", { id: id, size: size })
+            .done(function(data) {
+                console.log("Item removido do carrinho");
+                displayCart();
+        });
+}
+</script>
 </html>

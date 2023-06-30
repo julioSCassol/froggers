@@ -4,15 +4,25 @@ session_start();
 include 'db.php'; 
 
 $id = isset($_POST['id']) ? $_POST['id'] : "";
-
+$size = isset($_POST['size']) ? $_POST['size'] : "";
+$IDcliente = isset($_SESSION['IDcliente']) ? $_SESSION['IDcliente'] : "";
 $IDpedido = isset($_SESSION['IDpedido']) ? $_SESSION['IDpedido'] : "";
+if (isset($_SESSION['cart'][$id][$size])) {
+    $stmt = $conn->prepare("SELECT * FROM itens_pedido WHERE IDprodutos = ? AND IDpedidos = ?");
+    $stmt->bind_param("ii", $id, $IDpedido);
+    $stmt->execute();
 
-if (array_key_exists($id, $_SESSION['cart'])) {
-    if ($_SESSION['cart'][$id]['quantidade'] > 1) {
-        $_SESSION['cart'][$id]['quantidade']--;
+    $result = $stmt->get_result();
 
-        $stmt = $conn->prepare("UPDATE itens_pedido SET quantidade = quantidade - 1 WHERE IDprodutos = ? AND IDpedidos = ?");
-        $stmt->bind_param("ii", $id, $IDpedido);
+    while ($row = $result->fetch_assoc()) {
+        $quantidade = $row['quantidade'];
+    }
+
+    if ($quantidade > 1) {
+        $_SESSION['cart'][$id][$size]['quantidade']--;
+
+        $stmt = $conn->prepare("UPDATE itens_pedido SET quantidade = quantidade - 1 WHERE IDprodutos = ? AND IDpedidos = ? AND tamanho = ?");
+        $stmt->bind_param("iis", $id, $IDpedido, $size);
         $stmt->execute();
 
         if ($stmt->affected_rows > 0) {
@@ -21,8 +31,7 @@ if (array_key_exists($id, $_SESSION['cart'])) {
             echo "<script>alert('Um erro ocorreu ao diminuir a quantidade');</script>";
         }
     } else {
-        $size = $_SESSION['cart'][$id]['tamanho'];
-        unset($_SESSION['cart'][$id]);
+        unset($_SESSION['cart'][$id][$size]);
 
         $stmt = $conn->prepare("DELETE FROM itens_pedido WHERE IDprodutos = ? AND IDpedidos = ? AND tamanho = ?");
         $stmt->bind_param("iis", $id, $IDpedido, $size);
@@ -34,9 +43,18 @@ if (array_key_exists($id, $_SESSION['cart'])) {
             echo "<script>alert('Erro ao remover produto do carrinho');</script>";
         }
     }
-
-    $stmt->close();
 } else {
-    echo "<script>alert('Produto não encontrado no carrinho');</script>";
+    echo "<script>alert('Produto não está no carrinho');</script>";
 }
+
+$stmt->close();
 ?>
+<script>
+    function debug_to_console($data) {
+    $output = $data;
+    if (is_array($output))
+        $output = implode(',', $output);
+
+    echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
+}
+</script>

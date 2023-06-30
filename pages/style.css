@@ -60,15 +60,31 @@
     gap: 20px;
   }
     
-  .cart-total{
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.content {
+    flex: 1 0 auto;
+}
+
+.cart-total {
+    flex-shrink: 0;
     display: flex;
     align-items: center;
     color: var(--verde-froggers);
     font-weight: bold;
-  }
+}
 
   .cart-item{
     width: 350px;
   }
 
-  
+  #menu-container {
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }

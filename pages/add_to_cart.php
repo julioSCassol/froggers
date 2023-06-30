@@ -32,27 +32,22 @@ $itensPedido = $result->fetch_assoc();
 
 if ($itensPedido) {
     $quantidade = $itensPedido['quantidade'] + 1;
-    $_SESSION['cart'][$id] = array(
-        "quantidade" => $quantidade,
-        "precoUn" => $precoUn,
-        "id" => $id,
-        "IDpedido" => $IDpedido,
-        "tamanho" => $size
-    );
 } else {
     $quantidade = 1;
-    $_SESSION['cart'][$id] = array(
-        "quantidade" => $quantidade,
-        "precoUn" => $precoUn,
-        "id" => $id,
-        "IDpedido" => $IDpedido,
-        "tamanho" => $size
-    );
 
     $stmt = $conn->prepare("INSERT INTO itens_pedido (quantidade, precoUn, IDprodutos, IDpedidos, tamanho) VALUES (?, ?, ?, ?, ?)");
     $stmt->bind_param('idiis', $quantidade, $precoUn, $id, $IDpedido, $size);
     $stmt->execute();
 }
+
+$_SESSION['cart'][$id][$size] = array(
+    "quantidade" => $quantidade,
+    "precoUn" => $precoUn,
+    "id" => $id,
+    "IDpedido" => $IDpedido,
+    "tamanho" => $size
+);
+
 $stmt->close();
 $conn->close();
 ?>
