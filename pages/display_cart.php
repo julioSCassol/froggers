@@ -19,7 +19,7 @@ $_SESSION['cart'] = isset($_SESSION['cart']) && is_array($_SESSION['cart']) ? $_
 
 if(empty($IDcliente)) {
     echo '<div class="not-logged-in">
-            <p>Para visualizar o carrinho, por favor entre em sua conta.</p>
+            <p>Por favor, esteja em uma conta válida para usar o carrinho</p>
           </div>';
     exit();
 }

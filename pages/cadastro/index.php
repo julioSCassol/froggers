@@ -13,27 +13,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo '<script>alert("Senha deve conter ao menos um numero!");</script>';
     } else if ($senha !== $senha_confirmada) {
         echo '<script>alert("Senhas não coincidem!");</script>';
+    } else if (strlen($senha) < 6) {
+        echo '<script>alert("A senha deve ter no mínimo 6 caracteres!");</script>';
     } else if (!$captchaChecked) {
         echo '<script>alert("Por Favor verifique o captcha!");</script>';
     } else {
-        
         $captchaResult = (int) $_POST["captcha_result"];
         $userCaptcha = (int) $_POST["captcha"];
 
         if ($userCaptcha !== $captchaResult) {
             echo '<script>alert("CAPTCHA está incorreto!");</script>';
         } else {
+            $_SESSION['nome'] = $nome;
+            $_SESSION['email'] = $email;
+            $_SESSION['senha'] = $senha;
+
             $sql = "INSERT INTO clientes (nome, email, senha) VALUES ('$nome', '$email', '$senha')";
             if ($conn->query($sql) === TRUE) {
-                header("Location: ../login/index.php");
+                header("Location: ../cliente/index.php"); 
                 exit();
             } else {
                 echo "Error: " . $sql . "<br>" . $conn->error;
             }
         }
     }
-    }
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -126,7 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <input type="text" name="captcha" placeholder="Digite o resultado">
                 </div>
                 <button type="submit">Registrar</button>
-                <div id=cadastrado>Senha deve conter ao menos uma letra maiuscula e um número!</div>
+                <div id=cadastrado>Senha deve conter no mínimo 6 digitos, ao menos uma letra maiuscula e um número!</div>
                 <a id=cadastrado href="/pages/login/index.php">Já é cadastrado? Clique aqui para efetuar o login!</a>
             </form>
         </div>
