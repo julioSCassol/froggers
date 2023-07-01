@@ -11,7 +11,9 @@
 
 [Tecnologias e Ferramentas](#tecnologias-e-ferramentas)
 
-[Refercias](#referencias)
+[Banco de Dados](#modelo-relacional-do-banco-de-dados)
+
+[Refercias](#refercias)
 
 <br>
 
@@ -43,6 +45,15 @@ As seguintes tecnologias foram utilizadas no desenvolvimento do projeto:
 
 <br>
 
+## Modelo Relacional do Banco de Dados
+
+<p align="center">
+  <img src="BD relacional.jpeg" alt="BD Relacional">
+  <br>
+  Modelo relacional que será usado como referência para o banco de dados
+</p>
+<br>
+
 ## Refercias
 
 > O Projeto é baseado em um protótipo feito na plataforma Figma, em 2022 que pode ser visualizado [aqui](https://www.figma.com/proto/Zfx0EGkNO9BIIvuj7KcctE/Design-Site-de-Camisetas?node-id=17%3A6)
@@ -53,9 +64,3 @@ As seguintes tecnologias foram utilizadas no desenvolvimento do projeto:
 
 
 
-<p align="center">
-  <img src="BD relacional.jpeg" alt="BD Relacional">
-  <br>
-  Modelo relacional que será usado como referência para o banco de dados
-</p>
-<br>
