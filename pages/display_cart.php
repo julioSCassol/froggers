@@ -5,6 +5,7 @@ include 'db.php';
 
 $IDpedido = isset($_SESSION['IDpedido']) ? $_SESSION['IDpedido'] : "";
 $IDcliente = isset($_SESSION['IDcliente']) ? $_SESSION['IDcliente'] : "";
+$_SESSION['cart'] = isset($_SESSION['cart']) && is_array($_SESSION['cart']) ? $_SESSION['cart'] : array();
 
 ?>
 
@@ -15,6 +16,13 @@ $IDcliente = isset($_SESSION['IDcliente']) ? $_SESSION['IDcliente'] : "";
 </head>
 <body>
 <?php
+
+if(empty($IDcliente)) {
+    echo '<div class="not-logged-in">
+            <p>Para visualizar o carrinho, por favor entre em sua conta.</p>
+          </div>';
+    exit();
+}
 
 // isso aqui é só pro sapo triste aparecer
 $stmt = $conn->prepare("SELECT * FROM itens_pedido WHERE IDpedidos = ?");

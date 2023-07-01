@@ -1,4 +1,6 @@
-
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -31,11 +33,12 @@
                     </div>
                     
                     <div class="icones">
-                        <div class="conta">
-                            <a href="/pages/login/index.php">
+                    <div class="conta">
+                            <a id=conta-link href="/pages/login/index.php">
                                 <span class="material-icons">person</span>
+                                <span id=username><?php echo $_SESSION['username']; ?></span>
                             </a>
-                            </div>
+                        </div>
                         
                         
                         <span id="menu-button" class="material-icons">shopping_bag</span>
@@ -51,6 +54,8 @@
                         </div>
                         <div id="menu-footer">
                             <span id="continue-shopping" class="carrinho-vazio"><u>Continuar Comprando</u></span>
+                            <button id="confirm-payment" style="display: none;">Confirmar Pagamento</button>
+                            <button id="empty-cart" onclick="emptyCart()">Esvaziar Carrinho</button>
                         </div>
                     </div>
                     

@@ -136,14 +136,7 @@ document.querySelector('.zoom-container').addEventListener('mouseleave', functio
     document.querySelector('.zoom-image').style.transformOrigin = 'center center';
 });
 
-function getSelectedSize() {
-  let sizeElement = document.querySelector('.quadrado.clicked .letra');
-  if (sizeElement) {
-      return sizeElement.textContent;
-  } else {
-      return null;
-  }
-}
+fetchAndDisplayProducts();
 
 function displayCart() {
   $.get("../display_cart.php")
@@ -158,9 +151,11 @@ function displayCart() {
   });
 }
 
+
 $(document).ready(function() {
   displayCart();
 });
+
 
 $(document).ready(function() {
   displayCart();
@@ -176,4 +171,40 @@ function emptyCart() {
       console.log("Carrinho esvaziado");
       displayCart();
     });
+}
+
+document.querySelector('.zoom-container').addEventListener('mousemove', function(e) {
+  var x = (e.pageX - this.offsetLeft)/this.offsetWidth * 100;
+  var y = (e.pageY - this.offsetTop)/this.offsetHeight * 100;
+
+  document.querySelector('.zoom-image').style.transformOrigin = x + '% ' + y + '%';
+});
+
+document.querySelector('.zoom-container').addEventListener('mouseleave', function(e) {
+  document.querySelector('.zoom-image').style.transformOrigin = 'center center';
+});
+
+function getSelectedSize() {
+  let sizeElement = document.querySelector('.quadrado.clicked .letra');
+  if (sizeElement) {
+      return sizeElement.textContent;
+  } else {
+      return null;
+  }
+}
+
+function addToCart(id) {
+  let size = getSelectedSize();
+  console.log(size);
+
+  if (!size) {
+      alert("Por favor selecione o tamanho desejado!");
+      return;
+  }
+
+  $.post("../add_to_cart.php", { id: id, size: size })
+      .done(function(data) {
+        console.log("Item adicionado ao carrinho");
+        displayCart();
+      });
 }

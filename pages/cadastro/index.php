@@ -6,15 +6,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $senha = $_POST['password'];
     $senha_confirmada = $_POST['confirm_password'];
     $captchaChecked = isset($_POST["show-captcha"]);
-
-    if (!$captchaChecked) {
-        echo '<script>alert("Please verify the CAPTCHA!");</script>';
+    if (!preg_match('/[A-Z]/', $senha)) {
+        echo '<script>alert("Senha deve conter ao menos uma letra maiuscula!");</script>';
+    } else if (!preg_match('/[0-9]/', $senha)) {
+        echo '<script>alert("Senha deve conter ao menos um numero!");</script>';
+    } else if ($senha !== $senha_confirmada) {
+        echo '<script>alert("Senhas não coincidem!");</script>';
+    } else if (!$captchaChecked) {
+        echo '<script>alert("Por Favor verifique o captcha!");</script>';
     } else {
+        
         $captchaResult = (int) $_POST["captcha_result"];
         $userCaptcha = (int) $_POST["captcha"];
 
         if ($userCaptcha !== $captchaResult) {
-            echo '<script>alert("CAPTCHA answer is incorrect!");</script>';
+            echo '<script>alert("CAPTCHA está incorreto!");</script>';
         } else {
             $sql = "INSERT INTO clientes (nome, email, senha) VALUES ('$nome', '$email', '$senha')";
             if ($conn->query($sql) === TRUE) {
@@ -25,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
         }
     }
-}
+    }
 ?>
 
 <!DOCTYPE html>
@@ -118,6 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <input type="text" name="captcha" placeholder="Digite o resultado">
                 </div>
                 <button type="submit">Registrar</button>
+                <div id=cadastrado>Senha deve conter ao menos uma letra maiuscula e um número!</div>
                 <a id=cadastrado href="/pages/login/index.php">Já é cadastrado? Clique aqui para efetuar o login!</a>
             </form>
         </div>

@@ -32,10 +32,11 @@
                     
                     <div class="icones">
                         <div class="conta">
-                            <a href="/pages/login/index.php">
+                            <a id=conta-link href="/pages/login/index.php">
                                 <span class="material-icons">person</span>
+                                <span id=username><?php echo $_SESSION['username']; ?></span>
                             </a>
-                            </div>
+                        </div>
                         
                         
                         <span id="menu-button" class="material-icons">shopping_bag</span>
