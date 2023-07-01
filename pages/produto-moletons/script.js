@@ -208,3 +208,14 @@ function addToCart(id) {
         displayCart();
       });
 }
+function changeImage(element) {
+  document.getElementById('camiseta1').src = element.src;
+
+  var thumbnails = document.getElementsByClassName('small-image');
+
+  for (var i = 0; i < thumbnails.length; i++) {
+      thumbnails[i].classList.remove('active');
+  }
+
+  element.classList.add('active');
+}

@@ -30,7 +30,7 @@ $stmt->bind_param("i", $IDpedido);
 $stmt->execute();
 $resultSapo = $stmt->get_result();
 
-if ($resultSapo->num_rows == 0) {
+if ($resultSapo->num_rows < 1) {
     echo '<div class="Sapo-triste">
             <img src="/assets/images/Sapo-triste.png" alt="Sapo-triste">
             <p>Carrinho Vazio!</p>
@@ -94,10 +94,7 @@ if (!empty($ids)) {
     
     if ($resultSapo->num_rows > 0) {
         echo '<div id="menu-container">';
-        echo '<div class="cupom-container">';
-        echo '<input id="cupom-input" type="text" name="cupom" placeholder="Cupom">';
         echo '<p class="cart-total">Total do Carrinho: R$' . number_format($totalCarrinho, 2) . '</p>';
-        echo '</div>';
         echo '</div>';
     }
 

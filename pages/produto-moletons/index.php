@@ -95,6 +95,11 @@ $produto = getprodutoByID($id);
             </div>
             
             <div class="imagem-camiseta">
+            <div id="thumbnails">
+                <img class="small-image active" id="thumbnail-M" src="/assets/moletons/<?=$produto['nome']?>.png" onclick="changeImage(this)">
+                <img class="small-image" id="thumbnail-M" src="/assets/modeloM/modelo <?=$produto['nome']?>.png" onclick="changeImage(this)">
+                <img class="small-image" id="thumbnail-M" src="/assets/estampas/<?=$produto['nome']?>.png" onclick="changeImage(this)">
+            </div>
         <div id="camisetaIMG" class="zoom-container">
             <img id="camiseta1" class="zoom-image" src="/assets/moletons/<?=$produto['nome']?>.png" alt="camiseta">
         </div>
