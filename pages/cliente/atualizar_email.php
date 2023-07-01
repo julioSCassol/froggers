@@ -1,14 +1,18 @@
 <?php
 session_start();
 include '../db.php';
+$data = json_decode(file_get_contents('php://input'), true);
+$novoEmail = $data['novoEmail'];
+error_log($novoEmail);
+$id = $_SESSION['IDcliente'];
 
-$novoEmail = $_POST["novoEmail"];
-$idCliente = $_SESSION["IDcliente"];
+$sql = "UPDATE clientes SET email = ? WHERE id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("si", $novoEmail, $id);
 
-
-$stmt = $conn->prepare("UPDATE clients SET email = ? WHERE IDcliente = ?");
-$stmt->bind_param("si", $novoEmail, $idCliente);
-$stmt->execute();
-$stmt->close();
-
+if ($stmt->execute()) {
+    echo "Email updated successfully";
+} else {
+    echo "Error updating email: " . $conn->error;
+}
 ?>

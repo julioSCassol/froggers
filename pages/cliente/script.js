@@ -52,8 +52,8 @@ function toggleMenu() {
     var email = emailSpan.textContent;
     
     var novoEmail = prompt("Digite o novo email:", email);
- 
-    if (novoEmail !== null && novoEmail !== "") {
+
+    if (novoEmail !== null && novoEmail !== "" && novoEmail.includes("@")) {
         emailSpan.textContent = novoEmail;
 
         fetch('atualizar_email.php', {
@@ -70,32 +70,44 @@ function toggleMenu() {
                 console.log("Erro ao atualizar o email no banco de dados.");
             }
         });
+    } else {
+        alert("Por favor, insira um endereço de email válido.")
     }
 }
+
 
 function editarSenha() {
     var senhaSpan = document.getElementById("senha");
     var senha = senhaSpan.textContent;
     
     var novaSenha = prompt("Digite a nova senha:");
-    
+
     if (novaSenha !== null && novaSenha !== "") {
-        senhaSpan.textContent = "*".repeat(novaSenha.length);
-        
-        fetch('atualizar_senha.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ novaSenha: novaSenha })
-        })
-        .then(function(response) {
-            if (response.ok) {
-                console.log("Senha atualizada com sucesso no banco de dados.");
-            } else {
-                console.log("Erro ao atualizar a senha no banco de dados.");
-            }
-        });
+      if (!/[A-Z]/.test(novaSenha)) {
+        alert("Senha deve conter ao menos uma letra maiuscula!");
+    } else if (!/[0-9]/.test(novaSenha)) {
+        alert("Senha deve conter ao menos um numero!");
+    } else if (novaSenha.length < 6) {
+        alert("A senha deve ter no mínimo 6 caracteres!");
+    } else {
+      
+          senhaSpan.textContent = "*".repeat(novaSenha.length);
+          
+          fetch('atualizar_senha.php', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ novaSenha: novaSenha })
+          })
+          .then(function(response) {
+              if (response.ok) {
+                  console.log("Senha atualizada com sucesso no banco de dados.");
+              } else {
+                  console.log("Erro ao atualizar a senha no banco de dados.");
+              }
+          });
+    }
     }
 }
   

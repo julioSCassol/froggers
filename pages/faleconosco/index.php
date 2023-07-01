@@ -1,11 +1,12 @@
 <?php
-include '../db.php';
 session_start();
-$nome = $_SESSION['nome'];
+include '../db.php';
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="UTF-8">
         <title>Froggers</title>
         <link rel="icon" type="image/png" href="/assets/images/logo.png">
@@ -19,7 +20,7 @@ $nome = $_SESSION['nome'];
     </head>
     <body>
         <div class="pagina">
-            <div id="header">
+            <div id=    "header">
                 <div id="topper">
                     <a href="/pages/home/index.php">
                         <div class="logo-container">
@@ -57,9 +58,10 @@ $nome = $_SESSION['nome'];
                         </div>
                         <div id="menu-footer">
                             <span id="continue-shopping" class="carrinho-vazio"><u>Continuar Comprando</u></span>
+                            <button id="confirm-payment" style="display: none;">Confirmar Pagamento</button>
+                            <button id="empty-cart" onclick="emptyCart()">Esvaziar Carrinho</button>
                         </div>
                     </div>
-                    
                 </div>
 
                 <div id="coisas-que-vende">
@@ -74,16 +76,27 @@ $nome = $_SESSION['nome'];
                     </a>
                 </div>
             </div>
-        <div class="cliente-info">
-            <h2>Informações do Cliente</h2>
-            <p>Nome: <?php echo $fullName; ?></p>
-            <p>Email: <span id="email"><?php echo $emailEpico; ?></span> <button id="button-edit" onclick="editarEmail()">Editar</button></p>
-            <p>Senha: <span id="senha"><?php echo str_repeat('*', strlen($senha)); ?></span> <button id="button-edit" onclick="editarSenha()">Editar</button></p>
-        </div>
-    </div>
+            <div class="box">
+            <p class="bold-text">Fale Conosco!</p>
+            <div class="contact-us">
+                <h2><strong>Fale Conosco!</strong></h2>
+                <p>Nós da Froggers estamos sempre prontos para atender você! Se tiver dúvidas, sugestões ou quiser conversar sobre nossos produtos, fique à vontade para nos contatar. Estamos sempre a postos para garantir a melhor experiência de compra para você.</p>
+                <p>Agradecemos pelo interesse e pelo apoio. Estamos ansiosos para ouvir de você!</p>
+            </div>
 
-        
-      
+            <div class="redes_footer">
+                Siga nossas redes:
+                <div class= "imagens-divlegal">
+                    <a href="https://www.instagram.com/froggersoficial/">
+                    <img class="redes" src="/assets/images/logo-instagram.png" alt="redes">
+                    </a> 
+                    <a href="https://twitter.com/FroggersOFC">
+                    <img class="redes" src="/assets/images/logo-twitter.png" alt="redes">
+                    </a>  
+                </div>
+        </div>
+            </div>
+        </div>
 
         <footer>
             <div class="Atendimento">
@@ -95,7 +108,14 @@ $nome = $_SESSION['nome'];
             </div>
             <div class="redes_footer">
                 Siga nossas redes:
-                <img class="redes" src="/assets/images/redes.png" alt="redes">
+                <div class= "imagens-divlegal">
+                <a href="https://www.instagram.com/froggersoficial/">
+                <img class="redes" src="/assets/images/logo-instagram.png" alt="redes">
+                </a> 
+                <a href="https://twitter.com/FroggersOFC">
+                <img class="redes" src="/assets/images/logo-twitter.png" alt="redes">
+                </a>  
+                </div>
             </div>
             <div class="Ajuda">
                 Ajuda:
@@ -115,6 +135,7 @@ $nome = $_SESSION['nome'];
                 </div>
             </div>
         </footer> 
+        <div id="overlay" class="overlay-hidden"></div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="script.js"></script>
     </body>   
