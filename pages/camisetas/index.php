@@ -31,7 +31,7 @@ include '../db.php';
 
                     <div class="search-container">
                         <form id="search-form" action="/pages/pesquisa/" method="GET">
-                            <input id="search-input" type="text" name="search" placeholder="Search...">
+                            <input id="search-input" type="text" name="search" placeholder="Pesquisar...">
                             <button type="submit"> <span class="material-symbols-outlined">arrow_forward_ios</span></button>
                         </form>
                     </div>

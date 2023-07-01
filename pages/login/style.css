@@ -1304,11 +1304,26 @@ width: 200px;
 }
 
 
+
 .conta{
-cursor: pointer;
-display: flex;
-align-items: center;
-}
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-right: -1.5vh;
+  }
+  #conta-link{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    text-decoration: none;
+    gap: 10px;
+  }
+  #username{
+    color: var(--cinza-froggers);
+    font-family: 'Roboto', sans-serif;  
+    font-size: 2vh;
+  }
 
 .material-icons {
 color: var(--cinza-froggers);
