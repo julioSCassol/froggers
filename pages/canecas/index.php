@@ -1,5 +1,6 @@
 <?php
 session_start();
+include '../db.php';
 ?>
 
 <!DOCTYPE html>
@@ -39,7 +40,7 @@ session_start();
                         <div class="conta">
                             <a id=conta-link href="/pages/login/index.php">
                                 <span class="material-icons">person</span>
-                                <span id=username><?php echo $_SESSION['username']; ?></span>
+                                <span id=username><?php echo $firstName; ?></span>
                             </a>
                         </div>
                         
