@@ -1,8 +1,45 @@
-# Projeto de E-Commerce de produtos geeks, feito com HTML, css, Javascript e MySQL, utilizando scrum para maior eficiência na realizaç
+# Projeto de E-Commerce de produtos geeks, feito com HTML, css, Javascript e MySQL, utilizando scrum para maior eficiência na realização
 
 <p align="center">
   <img src="logo.svg" alt="Logo Froggers">
 </p>
+
+## Tópicos 
+[Sobre a Froggers](#sobre-o-froggers)
+
+[Funcionalidades](#funcionalidades)
+
+[Tecnologias e Ferramentas](#tecnologias-e-ferramentas)
+
+<br>
+
+
+## Sobre o Froggers
+Froggers é um projeto de e-commerce fantasia, realizado por 4 alunos da URI Campûs Santiago, com o intiuito de aprender mais sobre HTML, Javascript, PHP e Mysql.
+
+## Funcionalidades
+
+- [X] Cadastro de usuários.
+- [X] Sistema de login.
+- [X] Banco de dados MySQL.
+- [X] Integração entre banco de dados e HTML com php
+- [X] Realização de pedidos.
+- [X] Carrinho de compras.
+- [X] Buscar produtos.
+
+<br>
+
+## Tecnologias e Ferramentas
+
+As seguintes tecnologias foram utilizadas no desenvolvimento do projeto:
+
+- [HTML](https://devdocs.io/html/)
+- [CSS](https://devdocs.io/css/)
+- [PHP](https://devdocs.io/php/)
+- [JavaScript](https://devdocs.io/javascript/)
+- [MySQL](https://www.postgresql.org/)
+
+<br>
 
 ## Refercias
 
