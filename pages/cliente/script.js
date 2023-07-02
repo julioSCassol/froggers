@@ -110,4 +110,32 @@ function editarSenha() {
     }
     }
 }
+function editarNome() {
+  var nomeSpan = document.getElementById("nome");
+  var nome = nomeSpan.textContent;
+  
+  var novoNome = prompt("Digite o novo nome:", nome);
+
+  if (novoNome !== null && novoNome !== "") {
+      nomeSpan.textContent = novoNome;
+
+      fetch('atualizar_nome.php', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ novoNome: novoNome })
+      })
+      .then(function(response) {
+          if (response.ok) {
+              console.log("Nome atualizado com sucesso no banco de dados.");
+          } else {
+              console.log("Erro ao atualizar o nome no banco de dados.");
+          }
+      });
+  } else {
+      alert("Por favor, insira um nome válido.")
+  }
+}
+
   

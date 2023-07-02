@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 include '../db.php';
 ?>
 
@@ -128,8 +129,10 @@ include '../db.php';
                         Quem Somos
                         <span style="font-family: 'Material Icons', sans-serif;">info</span>
                     </div>
-                    <div class="Fale Conosco">
+                    <div class="FaleConosco">
+                    <a href="/pages/faleconosco/index.php"> 
                         Fale Conosco
+                    </a>
                         <span style="font-family: 'Material Icons', sans-serif;">call</span>
                     </div>
                 </div>

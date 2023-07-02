@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 $fullName = $_SESSION['username'];
 $idCliente = $_SESSION['IDcliente'];
 
@@ -24,6 +26,7 @@ $stmt->execute();
 $result = $stmt->get_result();
 
     $row = $result->fetch_assoc();
+    
     $emailEpico = $row['email'];
     $senha = $row['senha'];
     

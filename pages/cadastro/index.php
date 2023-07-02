@@ -168,8 +168,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     Quem Somos
                     <span style="font-family: 'Material Icons', sans-serif;">info</span>
                 </div>
-                <div class="Fale Conosco">
-                    Fale Conosco
+                <div class="FaleConosco">
+                    <a href="/pages/faleconosco/index.php"> 
+                        Fale Conosco
+                    </a>
                     <span style="font-family: 'Material Icons', sans-serif;">call</span>
                 </div>
             </div>

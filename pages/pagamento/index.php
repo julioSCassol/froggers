@@ -5,26 +5,55 @@ include '../db.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     if (isset($_SESSION['cart'])) {
-      foreach ($_SESSION['cart'] as $productId => $quantity) {
-        $quantidade = $quantity['quantidade']; 
-        $stmt = $conn->prepare("UPDATE produtos SET quantidade = quantidade - ? WHERE id = ?");
-        $stmt->bind_param('ii', $quantidade, $productId);
-        $stmt->execute();
-        
-      }
+        $itemsPurchased = array();
+
+        foreach ($_SESSION['cart'] as $productId => $quantity) {
+            $quantidade = $quantity; 
+            $stmt = $conn->prepare("UPDATE produtos SET quantidade = quantidade - ? WHERE id = ?");
+            $stmt->bind_param('ii', $quantidade, $productId);
+            $stmt->execute();
+
+
+            $stmt = $conn->prepare("SELECT nome, preco FROM produtos WHERE id = ?");
+            $stmt->bind_param('i', $productId);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $product = $result->fetch_assoc();
+
+
+            $itemPurchased = array(
+                'nome' => $product['nome'],
+                'preco' => $product['preco'],
+                'quantidade' => $quantity
+            );
+            $itemsPurchased[] = $itemPurchased;
+        }
+
+        $_SESSION['itemsPurchased'] = $itemsPurchased; 
     }
+
     if (isset($_SESSION['cart'])) {
         foreach ($_SESSION['cart'] as $id => $item) {
-          unset($_SESSION['cart'][$id]);
-          $stmt = $conn->prepare("DELETE FROM itens_pedido WHERE IDprodutos = ? AND IDpedidos = ?");
-          $stmt->bind_param("ii", $id, $IDpedido);
-          $stmt->execute();
+            unset($_SESSION['cart'][$id]);
+            $stmt = $conn->prepare("DELETE FROM itens_pedido WHERE IDprodutos = ? AND IDpedidos = ?");
+            $stmt->bind_param("ii", $id, $IDpedido);
+            $stmt->execute();
         }
-      }
-      
-  }
-  
+    }
+
+$dataPedido = date("Y-m-d");
+
+foreach ($_SESSION['itemsPurchased'] as &$item) {
+    $item['dataPedido'] = $dataPedido;
+}
+unset($item); 
+header("Location: index.php");
+exit();
+    header("Location: index.php");
+    exit();
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -142,8 +171,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         Quem Somos
                         <span style="font-family: 'Material Icons', sans-serif;">info</span>
                     </div>
-                    <div class="Fale Conosco">
+                    <div class="FaleConosco">
+                    <a href="/pages/faleconosco/index.php"> 
                         Fale Conosco
+                    </a>
                         <span style="font-family: 'Material Icons', sans-serif;">call</span>
                     </div>
                 </div>

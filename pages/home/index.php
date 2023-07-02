@@ -128,10 +128,13 @@ include '../db.php';
                         Quem Somos
                         <span style="font-family: 'Material Icons', sans-serif;">info</span>
                     </div>
-                    <div class="Fale Conosco">
+                    <div class="FaleConosco">
+                    <a href="/pages/faleconosco/index.php"> 
                         Fale Conosco
-                        <span style="font-family: 'Material Icons', sans-serif;">call</span>
-                    </div>
+                    </a>
+                    <span style="font-family: 'Material Icons', sans-serif;">call</span>
+                </div>
+
                 </div>
             </div>
         </footer> 

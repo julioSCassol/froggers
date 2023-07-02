@@ -413,3 +413,12 @@ height: 87%;
 #empty-cart:hover {
   background-color: #45a049;
 }
+
+.FaleConosco a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.FaleConosco span {
+  font-family: 'Material Icons', sans-serif;
+}

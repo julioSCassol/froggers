@@ -128,8 +128,8 @@ $produto = getprodutoByID($id);
                         <span class="letra">GG</span>
                     </button>
                 </div>
-                <button class="descricao-imagem" id="botao-grande" data-productid="<?= $produto['id'] ?>" onclick="addToCart(this.getAttribute('data-productid'))">Adicionar ao carrinho</button>
-                            <p class="descricao-imagem" id="quantidade-produto">Quantidade Disponível: <?= $produto['quantidade'] ?></p>
+                <button class="descricao-imagem" id="botao-grande" data-productid="<?= $produto['id'] ?>" onclick="addToCart(this.getAttribute('data-productid'))" <?php echo $produto['quantidade'] == 0 ? 'disabled' : ''; ?>>Adicionar ao carrinho</button>
+                <?php echo $produto['quantidade'] > 0 ? "Quantidade Disponível: {$produto['quantidade']}" : "Produto Esgotado"; ?>
 
         </div>
         </div>
@@ -174,8 +174,10 @@ $produto = getprodutoByID($id);
                         Quem Somos
                         <span style="font-family: 'Material Icons', sans-serif;">info</span>
                     </div>
-                    <div class="Fale Conosco">
+                    <div class="FaleConosco">
+                    <a href="/pages/faleconosco/index.php"> 
                         Fale Conosco
+                    </a>
                         <span style="font-family: 'Material Icons', sans-serif;">call</span>
                     </div>
                 </div>

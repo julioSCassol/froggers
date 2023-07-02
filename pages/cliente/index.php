@@ -1,6 +1,8 @@
 <?php
-include '../db.php';
+
 session_start();
+include '../db.php';
+
 $nome = $_SESSION['nome'];
 ?>
 <!DOCTYPE html>
@@ -76,9 +78,27 @@ $nome = $_SESSION['nome'];
             </div>
         <div class="cliente-info">
             <h2>Informações do Cliente</h2>
-            <p>Nome: <?php echo $fullName; ?></p>
+            <p>Nome: <span id="nome"><?php echo $nome; ?></span> <button id="button-edit" onclick="editarNome()">Editar</button></p>
             <p>Email: <span id="email"><?php echo $emailEpico; ?></span> <button id="button-edit" onclick="editarEmail()">Editar</button></p>
             <p>Senha: <span id="senha"><?php echo str_repeat('*', strlen($senha)); ?></span> <button id="button-edit" onclick="editarSenha()">Editar</button></p>
+            <div class="itens-comprados">
+    <h2>Meus Pedidos</h2>
+    <?php
+    if (isset($_SESSION['itemsPurchased'])) {
+        foreach ($_SESSION['itemsPurchased'] as $item) {
+            echo "<p>Nome: " . $item['nome'] . 
+            " | Quantidade: " . $item['quantidade'] . // ta com erro essa bomba
+            " | Preço: " . $item['preco'] . 
+            " | Data do Pedido: " . $item['dataPedido'] . "</p>"; 
+        }
+    } else {
+        echo "<p>Nenhum item foi comprado.</p>";
+    }
+    ?>
+    <form method="post" action="apagar_pedidos.php">
+    <button class="apagarPedidos" type="submit">Apagar Pedidos</button>
+</form>
+</div>
         </div>
     </div>
 
@@ -108,8 +128,10 @@ $nome = $_SESSION['nome'];
                         Quem Somos
                         <span style="font-family: 'Material Icons', sans-serif;">info</span>
                     </div>
-                    <div class="Fale Conosco">
+                    <div class="FaleConosco">
+                    <a href="/pages/faleconosco/index.php"> 
                         Fale Conosco
+                    </a>
                         <span style="font-family: 'Material Icons', sans-serif;">call</span>
                     </div>
                 </div>
