@@ -16,6 +16,8 @@ include '../db.php';
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet"> 
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet"> 
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick.css"/>
+        
     </head>
     <body>
 
@@ -96,11 +98,28 @@ include '../db.php';
 </div>
 
 <div class="destaques">
-  <p class="destaques-texto">DESTAQUES</p>
-  <div class="destaque-imagem">
-    <img src="\assets\banners\banner pqn inicial.png" alt="banner-destaque">
+  <div class="destaques-container">
+    <div class="destaques-content">
+      
+      <div class="destaques-texto">
+        <p>O MELHOR DO MUNDO GEEK</p>
+      </div>
+      
+    </div>
   </div>
-</div> 
+</div>
+  <div class="destaque-imagem">
+    <a href="/pages/moletons/index.php">
+      <img class="destaque-imagens-esp" id="destaque-imagens-mol" src="\assets\images\moletom.png" alt="banner-destaque">
+    </a>
+    <a href="/pages/camisetas/index.php">
+      <img class="destaque-imagens-esp" id="destaque-imagens-cam" src="\assets\images\camisetas.png" alt="">
+    </a>
+    <a href="/pages/canecas/index.php">
+      <img class="destaque-imagens-esp" id="destaque-imagens-can" src="\assets\images\canecas.png" alt="">
+    </a>
+  </div>
+</div>
 
         <div class="catalog-container">
                 <div class="catalog" id="catalog">
@@ -148,6 +167,7 @@ include '../db.php';
             </div>
         </footer> 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick.min.js"></script>
         <script src="script.js"></script>
     </body>   
     

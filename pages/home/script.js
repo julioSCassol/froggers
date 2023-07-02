@@ -60,7 +60,7 @@ function fetchAndDisplayProducts() {
             imageDir = 'canecas';
             break;
         }
-        let modeloDir = '';
+        let modeloDir =  '';
             switch (produto.IDcategoria) {
               case '1':
                 modeloDir = 'modeloM';
@@ -135,3 +135,5 @@ function emptyCart() {
       displayCart();
     });
 }
+
+
