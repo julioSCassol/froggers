@@ -70,8 +70,6 @@ if (!empty($ids)) {
             case 3:
                 $produtoCategoria = "canecas";
                 break;
-            default:
-                $produtoCategoria = "outras";
         }
         
         echo '<div class="cart-item">';

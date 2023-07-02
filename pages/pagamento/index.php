@@ -1,5 +1,4 @@
 <?php
-session_start();
 include '../db.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -8,11 +7,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $itemsPurchased = array();
 
         foreach ($_SESSION['cart'] as $productId => $quantity) {
-            $quantidade = $quantity; 
-            $stmt = $conn->prepare("UPDATE produtos SET quantidade = quantidade - ? WHERE id = ?");
-            $stmt->bind_param('ii', $quantidade, $productId);
+
+            $stmt = $conn->prepare("SELECT quantidade FROM itens_pedido WHERE IDprodutos = ?");
+            $stmt->bind_param('i', $productId);
             $stmt->execute();
 
+            $result = $stmt->get_result();
+            while ($row = $result->fetch_assoc()) {
+                $quantidade = $row['quantidade'];
+            }
+            
+
+            $stmt = $conn->prepare("UPDATE produtos SET quantidade = quantidade - ? WHERE id = ?");
+            $stmt->bind_param('ii', $quantidade, $productId);
+            error_log($quantidade);
+            $stmt->execute();
 
             $stmt = $conn->prepare("SELECT nome, preco FROM produtos WHERE id = ?");
             $stmt->bind_param('i', $productId);
@@ -35,6 +44,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_SESSION['cart'])) {
         foreach ($_SESSION['cart'] as $id => $item) {
             unset($_SESSION['cart'][$id]);
+            $stmt = $conn->prepare("SELECT id FROM pedidos WHERE IDcliente = ?");
+            $stmt->bind_param('i', $idCliente);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $row = $result->fetch_assoc();
+            $IDpedido = $row['id'];
+
             $stmt = $conn->prepare("DELETE FROM itens_pedido WHERE IDprodutos = ? AND IDpedidos = ?");
             $stmt->bind_param("ii", $id, $IDpedido);
             $stmt->execute();
@@ -90,10 +106,19 @@ exit();
                     
                     <div class="icones">
                         <div class="conta">
-                            <a id=conta-link href="/pages/login/index.php">
-                                <span class="material-icons">person</span>
-                                <span id=username><?php echo $firstName; ?></span>
-                            </a>
+                        <a id=conta-link href="
+                            <?php
+                            if(isset($_SESSION['IDcliente'])) {
+                                echo "/pages/cliente/index.php";
+                            } else {
+                                echo "/pages/login/index.php";
+                            }
+                            ?>
+                        ">
+                            <span class="material-icons">person</span>
+                            <span id=username><?php echo $firstName; ?></span>
+                        </a>
+
                         </div>
                     
                         <span id="menu-button" class="material-icons">shopping_bag</span>
@@ -136,7 +161,7 @@ exit();
           <div id="captcha"></div>
           <input type="text" name="captcha" placeholder="Digite o resultado">
         </div>
-        <button type="submit">Registrar</button>
+        <button type="submit">Confirmar</button>
       </form>
     </div>
     <div id="footer">

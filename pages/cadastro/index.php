@@ -74,10 +74,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 <div class="icones">
                         <div class="conta">
-                            <a id=conta-link href="/pages/login/index.php">
-                                <span class="material-icons">person</span>
-                                <span id=username><?php echo $firstName; ?></span>
-                            </a>
+                        <a id=conta-link href="
+                            <?php
+                            if(isset($_SESSION['IDcliente'])) {
+                                echo "/pages/cliente/index.php";
+                            } else {
+                                echo "/pages/login/index.php";
+                            }
+                            ?>
+                        ">
+                            <span class="material-icons">person</span>
+                            <span id=username><?php echo $firstName; ?></span>
+                        </a>
+
                         </div>
                     <span id="menu-button" class="material-icons">shopping_bag</span>
                 </div>

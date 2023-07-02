@@ -39,10 +39,19 @@ $nome = $_SESSION['nome'];
                     
                     <div class="icones">
                         <div class="conta">
-                            <a id=conta-link href="/pages/login/index.php">
-                                <span class="material-icons">person</span>
-                                <span id=username><?php echo $firstName; ?></span>
-                            </a>
+                        <a id=conta-link href="
+                            <?php
+                            if(isset($_SESSION['IDcliente'])) {
+                                echo "/pages/cliente/index.php";
+                            } else {
+                                echo "/pages/login/index.php";
+                            }
+                            ?>
+                        ">
+                            <span class="material-icons">person</span>
+                            <span id=username><?php echo $firstName; ?></span>
+                        </a>
+
                         </div>
                         
                         
@@ -78,22 +87,48 @@ $nome = $_SESSION['nome'];
             </div>
         <div class="cliente-info">
             <h2>Informações do Cliente</h2>
-            <p>Nome: <span id="nome"><?php echo $nome; ?></span> <button id="button-edit" onclick="editarNome()">Editar</button></p>
+            <p>Nome: <span id="nome"><?php echo $fullName; ?></span> <button id="button-edit" onclick="editarNome()">Editar</button></p>
             <p>Email: <span id="email"><?php echo $emailEpico; ?></span> <button id="button-edit" onclick="editarEmail()">Editar</button></p>
             <p>Senha: <span id="senha"><?php echo str_repeat('*', strlen($senha)); ?></span> <button id="button-edit" onclick="editarSenha()">Editar</button></p>
             <div class="itens-comprados">
-    <h2>Meus Pedidos</h2>
+    <h2 class="meus-pedidos">Meus Pedidos</h2>
     <?php
-    if (isset($_SESSION['itemsPurchased'])) {
-        foreach ($_SESSION['itemsPurchased'] as $item) {
-            echo "<p>Nome: " . $item['nome'] . 
-            " | Quantidade: " . $item['quantidade'] . // ta com erro essa bomba
-            " | Preço: " . $item['preco'] . 
-            " | Data do Pedido: " . $item['dataPedido'] . "</p>"; 
+        $clienteID = $_SESSION['IDcliente'];
+
+        $stmt = $conn->prepare("
+            SELECT 
+                c.nome AS ClienteNome, 
+                p.id AS PedidoID, 
+                p.total AS TotalPedido,
+                pr.nome AS ProdutoNome, 
+                ip.quantidade AS Quantidade, 
+                ip.precoUn AS PrecoUnidade,
+                ip.tamanho AS Tamanho
+            FROM 
+                clientes c 
+            JOIN 
+                pedidos p ON c.id = p.IDcliente
+            JOIN 
+                itens_pedido ip ON p.id = ip.IDpedidos
+            JOIN 
+                produtos pr ON ip.IDprodutos = pr.id
+            WHERE 
+                c.id = ?
+        ");
+
+        $stmt->bind_param('i', $clienteID);
+
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
+        while ($row = $result->fetch_assoc()) {
+            echo "<p>Nome do Cliente: " . $row['ClienteNome'] .
+            " | Produto: " . $row['ProdutoNome'] .
+            " | Quantidade: " . $row['Quantidade'] . 
+            " | Preço por unidade: " . $row['PrecoUnidade'] . 
+            " | Tamanho: " . $row['Tamanho'] ."</p>"; 
         }
-    } else {
-        echo "<p>Nenhum item foi comprado.</p>";
-    }
     ?>
     <form method="post" action="apagar_pedidos.php">
     <button class="apagarPedidos" type="submit">Apagar Pedidos</button>
