@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $sql = "INSERT INTO clientes (nome, email, senha) VALUES ('$nome', '$email', '$senha')";
             if ($conn->query($sql) === TRUE) {
-                header("Location: ../cliente/index.php"); 
+                header("Location: ../login/index.php"); 
                 exit();
             } else {
                 echo "Error: " . $sql . "<br>" . $conn->error;
