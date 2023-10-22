@@ -41,7 +41,7 @@ As seguintes tecnologias foram utilizadas no desenvolvimento do projeto:
 - [CSS](https://devdocs.io/css/)
 - [PHP](https://devdocs.io/php/)
 - [JavaScript](https://devdocs.io/javascript/)
-- [MySQL](https://www.postgresql.org/)
+- [MySQL](https://www.mysql.com)
 
 <br>
 
