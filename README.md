@@ -1,4 +1,4 @@
-# Projeto de E-Commerce de produtos geeks, feito com HTML, css, Javascript e MySQL, utilizando scrum para maior eficiência na realização
+# Projeto de E-Commerce de produtos geeks, feito com HTML, css, Javascript, Php e MySQL, utilizando scrum para maior eficiência na realização
 
 <p align="center">
   <img src="logo.svg" alt="Logo Froggers">
