@@ -19,7 +19,7 @@
 
 
 ## Sobre o Froggers
-Froggers é um projeto de e-commerce fantasia, realizado por 4 alunos da URI Campûs Santiago, com o intiuito de aprender mais sobre HTML, Javascript, PHP e Mysql.
+Froggers é um projeto de e-commerce fantasia, realizado por 4 alunos da URI Câmpus Santiago, com o intuito de aprender mais sobre HTML, Javascript, PHP e Mysql.
 
 ## Funcionalidades
 
